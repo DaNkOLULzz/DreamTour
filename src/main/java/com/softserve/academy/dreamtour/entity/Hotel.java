@@ -50,9 +50,9 @@ public class Hotel {
             return false;
         }
         Hotel hotel = (Hotel) o;
-        return idHotel.equals(hotel.idHotel) &&
-                hotelName.equals(hotel.hotelName) &&
-                city.equals(hotel.city);
+        return idHotel.equals(hotel.idHotel)
+            && hotelName.equals(hotel.hotelName)
+            && city.equals(hotel.city);
     }
 
     @Override
@@ -62,10 +62,10 @@ public class Hotel {
 
     @Override
     public String toString() {
-        return "Hotel{" +
-                "idHotel=" + idHotel +
-                ", hotelName='" + hotelName + '\'' +
-                ", city=" + city +
-                '}';
+        return "Hotel{"
+            + "idHotel=" + idHotel
+            + ", hotelName='" + hotelName + '\''
+            + ", city=" + city
+            + '}';
     }
 }

@@ -61,10 +61,10 @@ public class Room {
             return false;
         }
         Room room = (Room) o;
-        return price == room.price &&
-                idRoom.equals(room.idRoom) &&
-                roomType == room.roomType &&
-                hotel.equals(room.hotel);
+        return price == room.price
+            && idRoom.equals(room.idRoom)
+            && roomType == room.roomType
+            && hotel.equals(room.hotel);
     }
 
     @Override
@@ -74,11 +74,11 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" +
-                "idRoom=" + idRoom +
-                ", price=" + price +
-                ", roomType=" + roomType +
-                ", hotel=" + hotel +
-                '}';
+        return "Room{"
+            + "idRoom=" + idRoom
+            + ", price=" + price
+            + ", roomType=" + roomType
+            + ", hotel=" + hotel
+            + '}';
     }
 }
