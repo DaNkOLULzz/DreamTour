@@ -50,9 +50,9 @@ public class Hotel {
             return false;
         }
         Hotel hotel = (Hotel) o;
-        return idHotel == hotel.idHotel &&
-                hotelName == hotel.hotelName &&
-                city == hotel.city;
+        return idHotel.equals(hotel.idHotel) &&
+                hotelName.equals(hotel.hotelName) &&
+                city.equals(hotel.city);
     }
 
     @Override
