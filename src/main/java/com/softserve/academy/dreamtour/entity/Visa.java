@@ -5,13 +5,15 @@ import java.util.Objects;
 public class Visa {
     
     private Long idVisa;
-    private Tourist tourist;
+    private Person person;
     private Country country;
 
-
-    public Visa(Long idVisa, Tourist tourist, Country country) {
+    
+    public Visa() { }
+    
+    public Visa(Long idVisa, Person person, Country country) {
         this.idVisa = idVisa;
-        this.tourist = tourist;
+        this.person = person;
         this.country = country;
     }
 
@@ -26,13 +28,13 @@ public class Visa {
     }
 
 
-    public Tourist getTourist() {
-        return tourist;
+    public Person getPerson() {
+        return person;
     }
 
 
-    public void setTourist(Tourist tourist) {
-        this.tourist = tourist;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
 
@@ -51,27 +53,27 @@ public class Visa {
 
         if (o == this) { return true; }
         
-        if ((o instanceof Tourist) == false) {
+        if ((o instanceof Person) == false) {
             return false;
         }
    
         Visa visa = (Visa) o;
         
         return idVisa == visa.idVisa &&
-                Objects.equals(tourist, visa.tourist) &&
+                Objects.equals(person, visa.person) &&
                 Objects.equals(country, visa.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idVisa, tourist, country);
+        return Objects.hash(idVisa, person, country);
     }
     
     @Override
     public String toString() {
         return "Visa [" +
                 "idVisa=" + idVisa +
-                ", " + tourist.toString() +
+                ", " + person.toString() +
                 ", " + country.toString() +
                 "]";
     }
