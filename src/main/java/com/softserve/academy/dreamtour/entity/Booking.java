@@ -3,7 +3,8 @@ package com.softserve.academy.dreamtour.entity;
 import java.util.Objects;
 
 public class Booking {
-    private Long idBooking;
+
+    private int idBooking;
     private Country country;
     private City city;
     private Person person;
@@ -14,7 +15,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(Long idBooking, Country country, City city, Person person,
+    public Booking(int idBooking, Country country, City city, Person person,
                    Hotel hotel, Visa visa, Room room) {
         this.idBooking = idBooking;
         this.country = country;
@@ -25,11 +26,11 @@ public class Booking {
         this.room = room;
     }
 
-    public Long getIdBooking() {
+    public int getIdBooking() {
         return idBooking;
     }
 
-    public void setIdBooking(Long idBooking) {
+    public void setIdBooking(int idBooking) {
         this.idBooking = idBooking;
     }
 
@@ -90,13 +91,13 @@ public class Booking {
             return false;
         }
         Booking booking = (Booking) o;
-        return idBooking.equals(booking.idBooking)
-            && country.equals(booking.country)
-            && city.equals(booking.city)
-            && person.equals(booking.person)
-            && hotel.equals(booking.hotel)
+        return idBooking == booking.idBooking
+            && Objects.equals(country, booking.country)
+            && Objects.equals(city, booking.city)
+            && Objects.equals(person, booking.person)
+            && Objects.equals(hotel, booking.hotel)
             && Objects.equals(visa, booking.visa)
-            && room.equals(booking.room);
+            && Objects.equals(room, booking.room);
     }
 
     @Override

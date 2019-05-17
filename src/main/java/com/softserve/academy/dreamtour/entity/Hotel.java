@@ -4,24 +4,24 @@ import java.util.Objects;
 
 public class Hotel {
 
-    private Long idHotel;
+    private int idHotel;
     private String hotelName;
     private City city;
 
     public Hotel() {
     }
 
-    public Hotel(Long idHotel, String hotelName, City city) {
+    public Hotel(int idHotel, String hotelName, City city) {
         this.idHotel = idHotel;
         this.hotelName = hotelName;
         this.city = city;
     }
 
-    public Long getIdHotel() {
+    public int getIdHotel() {
         return idHotel;
     }
 
-    public void setIdHotel(Long idHotel) {
+    public void setIdHotel(int idHotel) {
         this.idHotel = idHotel;
     }
 
@@ -50,7 +50,7 @@ public class Hotel {
             return false;
         }
         Hotel hotel = (Hotel) o;
-        return idHotel.equals(hotel.idHotel)
+        return idHotel == hotel.idHotel
             && hotelName.equals(hotel.hotelName)
             && city.equals(hotel.city);
     }
