@@ -2,7 +2,7 @@ package com.softserve.academy.dreamtour.dao.interfaces;
 
 import java.util.List;
 
-public interface Dao<T> {
+public interface IDao<T> {
 
     List<T> getAll();
     
