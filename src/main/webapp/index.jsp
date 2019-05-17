@@ -3,16 +3,16 @@
 
 <html>
 
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>DreamTour</title>
-    </head>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dream Tour</title>
+</head>
 
-    <body>
-        
-        <div>
-        	<h1> HELLO WORLD! </h1>
-        </div>
+<body>
 
-    </body>
+	<div>
+		<h1>HELLO WORLD!</h1>
+	</div>
+
+</body>
 </html>
