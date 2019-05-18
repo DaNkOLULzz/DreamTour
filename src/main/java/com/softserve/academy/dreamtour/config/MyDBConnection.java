@@ -17,12 +17,4 @@ public class MyDBConnection {
         return conn;
     }
 
-    public static void main(String[] args) {
-        try (
-            Connection conn = MyDBConnection.getConnection()) {
-            System.out.println("Good");
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
-    }
 }
