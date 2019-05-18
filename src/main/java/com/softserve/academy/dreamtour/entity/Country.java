@@ -47,8 +47,8 @@ public class Country {
 
         Country country = (Country) obj;
         return countryId == country.countryId
-                && (countryName == country.countryName
-                || (countryName != null && countryName.equals(country.getCountryName())));
+                && Objects.equals(countryName, country.countryName);
+
 
     }
 

@@ -57,10 +57,8 @@ public class City {
 
         City city = (City) obj;
         return cityId == city.cityId
-                && (cityName == city.cityName
-                || (cityName != null && cityName.equals(city.getCityName())))
-
-                && Objects.equals(country, city.getCountry());
+                && Objects.equals(cityName, city.cityName)
+                && Objects.equals(country, city.country);
 
     }
 
