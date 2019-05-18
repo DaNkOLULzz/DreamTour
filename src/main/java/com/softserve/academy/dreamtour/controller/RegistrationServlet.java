@@ -29,14 +29,13 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        Person person = new Person(username, password, firstName,
-                lastName, PersonType.GUEST);
+        Person person = new Person(
+                request.getParameter("username"),
+                request.getParameter("password"),
+                request.getParameter("firstName"),
+                request.getParameter("lastName"), 
+                PersonType.GUEST
+                );
         
         IPersonDao personDao = new PersonDaoImpl();
 

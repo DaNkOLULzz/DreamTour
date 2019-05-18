@@ -17,7 +17,6 @@
 			<input type="text" placeholder="First Name" name="firstName" required> 
 			<input type="text" placeholder="Last Name" name="lastName" required> 
 			<input type="text" placeholder="User Name" name="username" required> 
-			<input type="email" placeholder="Email" name="email" required> 
 			<input type="password" placeholder="Password" name="password" required> 
 			<input type="password" placeholder="Confirm Password" 
 				"passwordConfirm" required>
