@@ -11,7 +11,8 @@ public class DBConnection {
     
     private static Connection conn = null;
     
-    public static synchronized Connection getConnection() throws NamingException, SQLException  {
+    public static synchronized Connection getConnection() 
+            throws NamingException, SQLException  {
        
         if (conn == null) {
             conn = initConnection();
@@ -24,9 +25,8 @@ public class DBConnection {
         
         InitialContext ctx = new InitialContext();
         Context initCtx  = (Context) ctx.lookup("java:/comp/env");
-        DataSource ds = (DataSource) initCtx.lookup("jdbc/DreamTourDB");
+        DataSource ds = (DataSource) initCtx.lookup("jdbc/dreamtour");
         Connection conn = ds.getConnection();
         return conn;
     }
-    
 }
