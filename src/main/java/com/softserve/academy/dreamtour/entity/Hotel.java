@@ -6,14 +6,21 @@ public class Hotel {
 
     private int idHotel;
     private String hotelName;
+    private String hotelDescription;
+    private String imageUrl;
+    private int stars;
     private City city;
 
     public Hotel() {
     }
 
-    public Hotel(int idHotel, String hotelName, City city) {
+    public Hotel(int idHotel, String hotelName,
+                 String hotelDescription, String imageUrl, int stars, City city) {
         this.idHotel = idHotel;
         this.hotelName = hotelName;
+        this.hotelDescription = hotelDescription;
+        this.imageUrl = imageUrl;
+        this.stars = stars;
         this.city = city;
     }
 
@@ -31,6 +38,30 @@ public class Hotel {
 
     public void setHotelName(String hotelName) {
         this.hotelName = hotelName;
+    }
+
+    public String getHotelDescription() {
+        return hotelDescription;
+    }
+
+    public void setHotelDescription(String hotelDescription) {
+        this.hotelDescription = hotelDescription;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
     }
 
     public City getCity() {
@@ -51,13 +82,16 @@ public class Hotel {
         }
         Hotel hotel = (Hotel) o;
         return idHotel == hotel.idHotel
+            && stars == hotel.stars
             && hotelName.equals(hotel.hotelName)
-            && city.equals(hotel.city);
+            && Objects.equals(hotelDescription, hotel.hotelDescription)
+            && imageUrl.equals(hotel.imageUrl)
+            && Objects.equals(city, hotel.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idHotel, hotelName, city);
+        return Objects.hash(idHotel, hotelName, hotelDescription, imageUrl, stars, city);
     }
 
     @Override
@@ -65,6 +99,9 @@ public class Hotel {
         return "Hotel{"
             + "idHotel=" + idHotel
             + ", hotelName='" + hotelName + '\''
+            + ", hotelDescription='" + hotelDescription + '\''
+            + ", imageUrl='" + imageUrl + '\''
+            + ", stars=" + stars
             + ", city=" + city
             + '}';
     }
