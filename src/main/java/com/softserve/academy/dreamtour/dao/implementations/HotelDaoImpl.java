@@ -42,8 +42,7 @@ public class HotelDaoImpl implements IHotelDao {
     @Override
     public boolean add(Hotel hotel) throws SQLException, NamingException {
         String query = "INSERT INTO hotel (hotel_name, hotel_description, image_url, stars, "
-            + "id_city) VALUES(?, ?, ?, ?, ?, ?)";
-        boolean added = false;
+            + "id_city) VALUES(?, ?, ?, ?, ?)";
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         String hotelName = hotel.getHotelName();
@@ -56,7 +55,7 @@ public class HotelDaoImpl implements IHotelDao {
         statement.setString(3, imageUrl);
         statement.setInt(4, stars);
         statement.setInt(5, city.getCityId());
-        added = statement.execute();
+        boolean added = statement.execute();
         statement.close();
 
         return added;
