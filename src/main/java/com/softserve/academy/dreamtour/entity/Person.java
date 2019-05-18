@@ -6,7 +6,7 @@ import com.softserve.academy.dreamtour.enums.PersonType;
 
 public class Person {
     
-    private Long idPerson;
+    private int idPerson;
     private String username;
     private String password;
     private String firstName;
@@ -15,8 +15,9 @@ public class Person {
     
     public Person() { }
 
-    public Person(Long idPerson, String username, String password, String firstName, String lastName,
-            PersonType personType) {
+    public Person(int idPerson, String username,
+            String password, String firstName,
+            String lastName, PersonType personType) {
         this.idPerson = idPerson;
         this.username = username;
         this.password = password;
@@ -26,11 +27,11 @@ public class Person {
     }
 
 
-    public Long getIdPerson() {
+    public int getIdPerson() {
         return idPerson;
     }
 
-    public void setIdPerson(Long idPerson) {
+    public void setIdPerson(int idPerson) {
         this.idPerson = idPerson;
     }
 
@@ -74,40 +75,42 @@ public class Person {
         this.personType = personType;
     }
 
-    
     @Override
     public boolean equals(Object o) {
-
-        if (o == this) { return true; }
         
-        if ((o instanceof Person) == false) {
+        if (this == o) {
+            return true;
+        }
+        
+        if (!(o instanceof Person)) {
             return false;
         }
-   
+        
         Person person = (Person) o;
         
-        return idPerson == person.idPerson &&
-                Objects.equals(username, person.username) &&
-                Objects.equals(firstName, person.firstName) &&
-                Objects.equals(lastName, person.lastName);
+        return idPerson == person.idPerson
+            && username.equals(person.username)
+            && password.equals(person.password)
+            && firstName.equals(person.firstName)
+            && lastName.equals(person.lastName)
+            && personType == person.personType;
     }
 
     @Override
     public int hashCode() {
-        
-        return Objects.hash(idPerson, username, password, firstName, lastName);
+        return Objects.hash(idPerson, username, password, firstName, lastName, personType);
     }
 
     @Override
     public String toString() {
         
-        return "Person [" +
-                "idPerson=" + idPerson +
-                ", username=" + username +
-                ", firstName=" + firstName +
-                ", lastName=" + lastName +
-                ", personType=" + personType +
-                "]";
+        return "Person [" 
+                + "idPerson=" + idPerson 
+                + ", username=" + username 
+                + ", firstName=" + firstName 
+                + ", lastName=" + lastName 
+                + ", personType=" + personType 
+                + "]";
     }
     
 }

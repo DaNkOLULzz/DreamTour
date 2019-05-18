@@ -4,26 +4,26 @@ import java.util.Objects;
 
 public class Visa {
     
-    private Long idVisa;
+    private int idVisa;
     private Person person;
     private Country country;
 
     
     public Visa() { }
     
-    public Visa(Long idVisa, Person person, Country country) {
+    public Visa(int idVisa, Person person, Country country) {
         this.idVisa = idVisa;
         this.person = person;
         this.country = country;
     }
 
     
-    public Long getIdVisa() {
+    public int getIdVisa() {
         return idVisa;
     }
 
 
-    public void setIdVisa(Long idVisa) {
+    public void setIdVisa(int idVisa) {
         this.idVisa = idVisa;
     }
 
@@ -51,7 +51,9 @@ public class Visa {
     @Override
     public boolean equals(Object o) {
 
-        if (o == this) { return true; }
+        if (o == this) { 
+            return true; 
+        }
         
         if ((o instanceof Person) == false) {
             return false;
@@ -59,9 +61,9 @@ public class Visa {
    
         Visa visa = (Visa) o;
         
-        return idVisa == visa.idVisa &&
-                Objects.equals(person, visa.person) &&
-                Objects.equals(country, visa.country);
+        return idVisa == visa.idVisa 
+                && Objects.equals(person, visa.person) 
+                && Objects.equals(country, visa.country);
     }
 
     @Override
@@ -71,11 +73,11 @@ public class Visa {
     
     @Override
     public String toString() {
-        return "Visa [" +
-                "idVisa=" + idVisa +
-                ", " + person.toString() +
-                ", " + country.toString() +
-                "]";
+        return "Visa [" 
+                + "idVisa=" + idVisa 
+                + ", " + person.toString() 
+                + ", " + country.toString() 
+                + "]";
     }
     
 }
