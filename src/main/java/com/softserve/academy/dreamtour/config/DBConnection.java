@@ -11,7 +11,8 @@ public class DBConnection {
     
     private static Connection conn = null;
     
-    public static synchronized Connection getConnection() throws NamingException, SQLException  {
+    public static synchronized Connection getConnection() 
+            throws NamingException, SQLException  {
        
         if (conn == null) {
             conn = initConnection();

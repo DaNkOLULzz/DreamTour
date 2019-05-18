@@ -1,15 +1,20 @@
 package com.softserve.academy.dreamtour.controller;
 
+import com.softserve.academy.dreamtour.dao.implementations.PersonDaoImpl;
+import com.softserve.academy.dreamtour.dao.interfaces.IPersonDao;
 import com.softserve.academy.dreamtour.entity.Person;
 import com.softserve.academy.dreamtour.enums.PersonType;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
@@ -30,10 +35,18 @@ public class RegistrationServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        Person person = new Person(1, username, password, firstName,
+        Person person = new Person(username, password, firstName,
                 lastName, PersonType.GUEST);
         
-        System.out.println(person);
+        IPersonDao personDao = new PersonDaoImpl();
+
+        try {
+            personDao.add(person);
+        } catch (SQLException | NamingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
         response.sendRedirect("/main");
     }
 

@@ -25,6 +25,15 @@ public class Person {
         this.lastName = lastName;
         this.personType = personType;
     }
+    
+    public Person(String username, String password, String firstName,
+            String lastName, PersonType personType) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.personType = personType;
+    }
 
 
     public int getIdPerson() {
