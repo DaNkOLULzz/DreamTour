@@ -52,20 +52,20 @@ public class HotelDaoImpl implements IHotelDao {
         statement.setString(3, imageUrl);
         statement.setInt(4, stars);
         statement.setInt(5, idCity);
-        boolean added = statement.execute();
+        boolean isAdded = statement.execute();
         statement.close();
 
-        return added;
+        return isAdded;
     }
 
     @Override
     public Hotel get(int id) throws SQLException, NamingException {
         String query = "SELECT * FROM hotel WHERE id = ?;";
-        Hotel hotel = new Hotel();
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, id);
         ResultSet set = statement.executeQuery();
+        Hotel hotel = new Hotel();
         while (set.next()) {
             hotel.setIdHotel(set.getInt("id"));
             hotel.setHotelName(set.getString("hotel_name"));
@@ -97,10 +97,10 @@ public class HotelDaoImpl implements IHotelDao {
         statement.setInt(4, stars);
         statement.setInt(5, idCity);
         statement.setInt(6, hotelId);
-        boolean updated = statement.execute();
+        boolean isUpdated = statement.execute();
         statement.close();
 
-        return updated;
+        return isUpdated;
     }
 
     @Override
@@ -109,9 +109,9 @@ public class HotelDaoImpl implements IHotelDao {
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, id);
-        boolean deleted = statement.execute();
+        boolean isDeleted = statement.execute();
         statement.close();
 
-        return deleted;
+        return isDeleted;
     }
 }
