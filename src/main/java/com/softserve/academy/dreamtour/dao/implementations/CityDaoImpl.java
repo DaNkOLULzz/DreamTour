@@ -19,7 +19,7 @@ public class CityDaoImpl implements ICityDao {
     }
 
     @Override
-    public List<City> getAll() throws SQLException {
+    public List<City> getAll() throws SQLException, NamingException {
         ArrayList<City> cityList = new ArrayList<>();
         String query = "SELECT * FROM city";
         Statement statement = con.createStatement();
@@ -28,6 +28,7 @@ public class CityDaoImpl implements ICityDao {
             City city = new City();
             city.setCityId(rs.getInt("id"));
             city.setCityName(rs.getString("city_name"));
+            city.setCountryId(rs.getInt("id_country"));
             cityList.add(city);
         }
         statement.close();
@@ -40,9 +41,9 @@ public class CityDaoImpl implements ICityDao {
         boolean added = false;
         PreparedStatement statement = con.prepareStatement(query);
         String cityName = city.getCityName();
-        int cityCountry = city.getCountry().getCountryId();
+        int countryId = city.getCountryId();
         statement.setString(1, cityName);
-        statement.setInt(2, cityCountry);
+        statement.setInt(2, countryId);
         added = statement.execute();
         statement.close();
 
@@ -59,12 +60,9 @@ public class CityDaoImpl implements ICityDao {
         while (set.next()) {
             city.setCityId(set.getInt("id"));
             city.setCityName(set.getString("country_name"));
-            int countryId = set.getInt("id_country");
-            Country country = new CountryDaoImpl().get(countryId);
-            city.setCountry(country);
+            city.setCountryId(set.getInt("id_country"));
         }
         statement.close();
-
         return city;
     }
 
@@ -75,7 +73,7 @@ public class CityDaoImpl implements ICityDao {
         PreparedStatement statement = con.prepareStatement(query);
         String cityName = city.getCityName();
         int cityId = city.getCityId();
-        int countryId = city.getCountry().getCountryId();
+        int countryId = city.getCountryId();
         statement.setString(1, cityName);
         statement.setInt(2, countryId);
         statement.setInt(3, cityId);

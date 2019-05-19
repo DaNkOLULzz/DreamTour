@@ -2,11 +2,8 @@ package com.softserve.academy.dreamtour.dao.interfaces;
 
 
 import javax.naming.NamingException;
-
 import java.sql.SQLException;
 import java.util.List;
-
-import javax.naming.NamingException;
 
 public interface IDao<T> {
 
