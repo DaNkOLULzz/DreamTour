@@ -6,15 +6,15 @@ public class City {
 
     private int cityId;
     private String cityName;
-    private Country country;
+    private int countryId;
 
     public City() {
     }
 
-    public City(int cityId, String cityName, Country country) {
+    public City(int cityId, String cityName, int countryId) {
         this.cityId = cityId;
         this.cityName = cityName;
-        this.country = country;
+        this.countryId = countryId;
     }
 
     public int getCityId() {
@@ -33,17 +33,17 @@ public class City {
         this.cityName = cityName;
     }
 
-    public Country getCountry() {
-        return country;
+    public int getCountryId() {
+        return countryId;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cityId, cityName, country);
+        return Objects.hash(cityId, cityName, countryId);
     }
 
     @Override
@@ -58,12 +58,12 @@ public class City {
         City city = (City) obj;
         return cityId == city.cityId
                 && Objects.equals(cityName, city.cityName)
-                && Objects.equals(country, city.country);
+                && countryId== city.countryId;
 
     }
 
     @Override
     public String toString() {
-        return "City [ city id: " + cityId + ", city name: " + cityName + ", " + country.toString() + "]";
+        return "City [ city id: " + cityId + ", city name: " + cityName + ", " + countryId + "]";
     }
 }
