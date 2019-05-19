@@ -1,5 +1,6 @@
 package com.softserve.academy.dreamtour.entity;
 
+import java.sql.Date;
 import java.util.Objects;
 
 public class Visa {
@@ -7,19 +8,22 @@ public class Visa {
     private int idVisa;
     private int idPerson;
     private int idCountry;
+    private Date endDate;
 
     
     public Visa() { }
     
-    public Visa(int idPerson, int idCountry) {
+    public Visa(int idPerson, int idCountry, Date endDate) {
         this.idPerson = idPerson;
         this.idCountry = idCountry;
+        this.endDate = endDate;
     }
 
-    public Visa(int idVisa, int idPerson, int idCountry) {
+    public Visa(int idVisa, int idPerson, int idCountry, Date endDate) {
         this.idVisa = idVisa;
         this.idPerson = idPerson;
         this.idCountry = idCountry;
+        this.endDate = endDate;
     }
 
     
@@ -46,6 +50,14 @@ public class Visa {
     public void setIdCountry(int idCountry) {
         this.idCountry = idCountry;
     }
+    
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -59,15 +71,16 @@ public class Visa {
         }
    
         Visa visa = (Visa) o;
-        
+
         return idVisa == visa.idVisa 
                 && idPerson == visa.idPerson 
-                && idCountry == visa.idCountry;
+                && idCountry == visa.idCountry
+                && endDate.equals(visa.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idVisa, idPerson, idCountry);
+        return Objects.hash(idVisa, idPerson, idCountry, endDate);
     }
     
     @Override
@@ -75,7 +88,8 @@ public class Visa {
         return "Visa [" 
                 + "idVisa=" + idVisa 
                 + ", idPerson=" + idPerson 
-                + ", idCountry" + idCountry 
+                + ", idCountry=" + idCountry
+                + ", endDate=" + endDate
                 + "]";
     }
     
