@@ -81,11 +81,11 @@ public class HotelDaoImpl implements IHotelDao {
 
     @Override
     public boolean update(Hotel hotel) throws SQLException, NamingException {
-        String query = "UPDATE hotel SET hotel_name=?, hotel_description=?, image_url=?, "
-            + "stars=?, id_city=? WHERE id=?";
+        String query = "UPDATE hotel SET hotel_name = ?, hotel_description = ?, image_url = ?, "
+            + "stars = ?, id_city = ? WHERE id = ?";
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
-        int hotelId = hotel.getIdHotel();
+        int idHotel = hotel.getIdHotel();
         String hotelName = hotel.getHotelName();
         String hotelDescription = hotel.getHotelDescription();
         String imageUrl = hotel.getImageUrl();
@@ -96,7 +96,7 @@ public class HotelDaoImpl implements IHotelDao {
         statement.setString(3, imageUrl);
         statement.setInt(4, stars);
         statement.setInt(5, idCity);
-        statement.setInt(6, hotelId);
+        statement.setInt(6, idHotel);
         boolean isUpdated = statement.execute();
         statement.close();
 
