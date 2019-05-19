@@ -33,6 +33,7 @@ public class PersonDaoImpl implements IPersonDao {
             person.setPersonType(PersonType.USER);
             personList.add(person);
         }
+        statement.close();
         
         return personList;
     }
@@ -96,6 +97,7 @@ public class PersonDaoImpl implements IPersonDao {
         ps.setInt(1, id);
         
         boolean isDeleted = ps.execute();
+        ps.close();
         
         return isDeleted;
     }
