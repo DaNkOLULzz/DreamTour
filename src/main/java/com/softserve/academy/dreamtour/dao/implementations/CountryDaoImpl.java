@@ -31,6 +31,7 @@ public class CountryDaoImpl implements ICountryDao {
             country.setCountryName(rs.getString("country_name"));
             countryList.add(country);
         }
+        statement.close();
         return countryList;
     }
 
@@ -84,6 +85,7 @@ public class CountryDaoImpl implements ICountryDao {
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, id);
         deleted = statement.execute();
+        statement.close();
         return deleted;
 
     }
