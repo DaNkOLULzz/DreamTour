@@ -21,16 +21,20 @@ public class PersonDaoImpl implements IPersonDao {
         
         ArrayList<Person> personList = new ArrayList<>();
         
-        String sql = "SELECT username, first_name, last_name FROM person";
+        String sql = "SELECT * FROM person";
+        
         Statement statement = DBConnection.getConnection().createStatement();
         ResultSet rs = statement.executeQuery(sql);
         
         while (rs.next()) {
+            
             Person person = new Person();
+            person.setIdPerson(rs.getInt("id"));
             person.setUsername(rs.getString("username"));
+            person.setPassword(rs.getString("pass"));
             person.setFirstName(rs.getString("first_name"));
-            person.setLastName(rs.getString("last_name"));
-            person.setPersonType(PersonType.USER);
+            person.setPersonType(PersonType.valueOf(rs.getString("person_type")));
+            
             personList.add(person);
         }
         statement.close();
@@ -42,6 +46,7 @@ public class PersonDaoImpl implements IPersonDao {
 
         String sql = "INSERT INTO person (username, pass, first_name, last_name, person_type) "
                 + "VALUES (?, ?, ?, ?, ?)";
+        
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
         ps.setString(1, person.getUsername());
         ps.setString(2, person.getPassword());
@@ -49,21 +54,25 @@ public class PersonDaoImpl implements IPersonDao {
         ps.setString(4, person.getLastName());
         ps.setString(5, "user");
         
-        int rows = ps.executeUpdate();
+        boolean isAdded = ps.executeUpdate() > 0;
         ps.close();
         
-        return rows > 0;
+        return isAdded;
     }
 
     public Person get(int id) throws SQLException, NamingException {
         
         Person person = new Person();
-
+        
         String sql = "SELECT * FROM person WHERE person.id = ?";
+        
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
+        
         while (rs.next()) {
+            
+            person.setIdPerson(rs.getInt("id"));
             person.setUsername(rs.getString("username"));
             person.setPassword(rs.getString("pass"));
             person.setFirstName(rs.getString("first_name"));
@@ -78,8 +87,8 @@ public class PersonDaoImpl implements IPersonDao {
     public boolean update(Person person) throws SQLException, NamingException {
 
         String sql = "UPDATE person SET first_name=?, last_name=? WHERE id=?";
+        
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
-
         ps.setString(1, person.getFirstName());
         ps.setString(2, person.getLastName());
         ps.setInt(3, person.getIdPerson());
@@ -93,6 +102,7 @@ public class PersonDaoImpl implements IPersonDao {
     public boolean delete(int id)  throws SQLException, NamingException {
 
         String sql = "DELETE FROM person WHERE id=?";
+        
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
         ps.setInt(1, id);
         
