@@ -31,6 +31,7 @@ public class CountryDaoImpl implements ICountryDao {
             country.setCountryName(rs.getString("country_name"));
             countryList.add(country);
         }
+        statement.close();
         return countryList;
     }
 
@@ -49,7 +50,7 @@ public class CountryDaoImpl implements ICountryDao {
 
     @Override
     public Country get(int id) throws SQLException {
-        String query = "SELECT country_name FROM country WHERE country.id = ? LIMIT 1";
+        String query = "SELECT country_name FROM country WHERE country.id = ?";
         Country country = new Country();
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, id);
@@ -84,6 +85,7 @@ public class CountryDaoImpl implements ICountryDao {
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, id);
         deleted = statement.execute();
+        statement.close();
         return deleted;
 
     }
