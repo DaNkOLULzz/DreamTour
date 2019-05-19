@@ -5,16 +5,21 @@ import java.util.Objects;
 public class Visa {
     
     private int idVisa;
-    private Person person;
-    private Country country;
+    private int idPerson;
+    private int idCountry;
 
     
     public Visa() { }
     
-    public Visa(int idVisa, Person person, Country country) {
+    public Visa(int idPerson, int idCountry) {
+        this.idPerson = idPerson;
+        this.idCountry = idCountry;
+    }
+
+    public Visa(int idVisa, int idPerson, int idCountry) {
         this.idVisa = idVisa;
-        this.person = person;
-        this.country = country;
+        this.idPerson = idPerson;
+        this.idCountry = idCountry;
     }
 
     
@@ -22,31 +27,25 @@ public class Visa {
         return idVisa;
     }
 
-
     public void setIdVisa(int idVisa) {
         this.idVisa = idVisa;
     }
 
-
-    public Person getPerson() {
-        return person;
+    public int getIdPerson() {
+        return idPerson;
     }
 
-
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setIdPerson(int idPerson) {
+        this.idPerson = idPerson;
     }
 
-
-    public Country getCountry() {
-        return country;
+    public int getIdCountry() {
+        return idCountry;
     }
 
-
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setIdCountry(int idCountry) {
+        this.idCountry = idCountry;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -62,21 +61,21 @@ public class Visa {
         Visa visa = (Visa) o;
         
         return idVisa == visa.idVisa 
-                && Objects.equals(person, visa.person) 
-                && Objects.equals(country, visa.country);
+                && idPerson == visa.idPerson 
+                && idCountry == visa.idCountry;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idVisa, person, country);
+        return Objects.hash(idVisa, idPerson, idCountry);
     }
     
     @Override
     public String toString() {
         return "Visa [" 
                 + "idVisa=" + idVisa 
-                + ", " + person.toString() 
-                + ", " + country.toString() 
+                + ", idPerson=" + idPerson 
+                + ", idCountry" + idCountry 
                 + "]";
     }
     
