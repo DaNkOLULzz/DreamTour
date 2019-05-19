@@ -34,7 +34,7 @@ public class RegistrationServlet extends HttpServlet {
                 request.getParameter("password"),
                 request.getParameter("firstName"),
                 request.getParameter("lastName"), 
-                PersonType.GUEST
+                PersonType.USER
                 );
         
         IPersonDao personDao = new PersonDaoImpl();
