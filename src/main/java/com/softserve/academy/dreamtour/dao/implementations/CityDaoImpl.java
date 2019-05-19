@@ -52,7 +52,7 @@ public class CityDaoImpl implements ICityDao {
 
     @Override
     public City get(int id) throws SQLException, NamingException {
-        String query = "SELECT city_name FROM city WHERE city.id = ? LIMIT 1";
+        String query = "SELECT city_name FROM city WHERE city.id = ?";
         City city = new City();
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, id);
