@@ -3,12 +3,15 @@ package com.softserve.academy.dreamtour.dao.implementations;
 import com.softserve.academy.dreamtour.config.DBConnection;
 import com.softserve.academy.dreamtour.dao.interfaces.IBookingDao;
 import com.softserve.academy.dreamtour.entity.Booking;
-import com.softserve.academy.dreamtour.entity.Hotel;
 
-import javax.naming.NamingException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.NamingException;
 
 public class BookingDaoImpl implements IBookingDao {
 
@@ -91,8 +94,8 @@ public class BookingDaoImpl implements IBookingDao {
 
     @Override
     public boolean update(Booking booking) throws SQLException, NamingException {
-        String query = "UPDATE booking SET startDate = ?, endDate = ?, id_country = ?, id_city = ?," +
-            "id_tourist = ?, id_hotel = ?, id_visa = ?, id_room = ? WHERE id = ?";
+        String query = "UPDATE booking SET startDate = ?, endDate = ?, id_country = ?, id_city = ?,"
+            + "id_tourist = ?, id_hotel = ?, id_visa = ?, id_room = ? WHERE id = ?";
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         int idBooking = booking.getIdBooking();
