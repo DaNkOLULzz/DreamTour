@@ -9,19 +9,18 @@ public class Hotel {
     private String hotelDescription;
     private String imageUrl;
     private int stars;
-    private City city;
+    private int idCity;
 
     public Hotel() {
     }
 
-    public Hotel(int idHotel, String hotelName,
-                 String hotelDescription, String imageUrl, int stars, City city) {
+    public Hotel(int idHotel, String hotelName, String hotelDescription, String imageUrl, int stars, int idCity) {
         this.idHotel = idHotel;
         this.hotelName = hotelName;
         this.hotelDescription = hotelDescription;
         this.imageUrl = imageUrl;
         this.stars = stars;
-        this.city = city;
+        this.idCity = idCity;
     }
 
     public int getIdHotel() {
@@ -64,12 +63,12 @@ public class Hotel {
         this.stars = stars;
     }
 
-    public City getCity() {
-        return city;
+    public int getIdCity() {
+        return idCity;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setIdCity(int idCity) {
+        this.idCity = idCity;
     }
 
     @Override
@@ -83,15 +82,15 @@ public class Hotel {
         Hotel hotel = (Hotel) o;
         return idHotel == hotel.idHotel
             && stars == hotel.stars
-            && hotelName.equals(hotel.hotelName)
+            && idCity == hotel.idCity
+            && Objects.equals(hotelName, hotel.hotelName)
             && Objects.equals(hotelDescription, hotel.hotelDescription)
-            && imageUrl.equals(hotel.imageUrl)
-            && Objects.equals(city, hotel.city);
+            && Objects.equals(imageUrl, hotel.imageUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idHotel, hotelName, hotelDescription, imageUrl, stars, city);
+        return Objects.hash(idHotel, hotelName, hotelDescription, imageUrl, stars, idCity);
     }
 
     @Override
@@ -102,7 +101,7 @@ public class Hotel {
             + ", hotelDescription='" + hotelDescription + '\''
             + ", imageUrl='" + imageUrl + '\''
             + ", stars=" + stars
-            + ", city=" + city
+            + ", idCity=" + idCity
             + '}';
     }
 }

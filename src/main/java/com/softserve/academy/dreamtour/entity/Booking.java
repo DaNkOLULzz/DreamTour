@@ -1,29 +1,34 @@
 package com.softserve.academy.dreamtour.entity;
 
+import java.sql.Date;
 import java.util.Objects;
 
 public class Booking {
 
     private int idBooking;
-    private Country country;
-    private City city;
-    private Person person;
-    private Hotel hotel;
-    private Visa visa;
-    private Room room;
+    private Date startDate;
+    private Date endDate;
+    private int idCountry;
+    private int idCity;
+    private int idPerson;
+    private int idHotel;
+    private int idVisa;
+    private int IdRoom;
 
     public Booking() {
     }
 
-    public Booking(int idBooking, Country country, City city, Person person,
-                   Hotel hotel, Visa visa, Room room) {
+    public Booking(int idBooking, Date startDate, Date endDate, int idCountry, int idCity,
+                   int idPerson, int idHotel, int idVisa, int idRoom) {
         this.idBooking = idBooking;
-        this.country = country;
-        this.city = city;
-        this.person = person;
-        this.hotel = hotel;
-        this.visa = visa;
-        this.room = room;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.idCountry = idCountry;
+        this.idCity = idCity;
+        this.idPerson = idPerson;
+        this.idHotel = idHotel;
+        this.idVisa = idVisa;
+        IdRoom = idRoom;
     }
 
     public int getIdBooking() {
@@ -34,52 +39,68 @@ public class Booking {
         this.idBooking = idBooking;
     }
 
-    public Country getCountry() {
-        return country;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public City getCity() {
-        return city;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
-    public Person getPerson() {
-        return person;
+    public int getIdCountry() {
+        return idCountry;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setIdCountry(int idCountry) {
+        this.idCountry = idCountry;
     }
 
-    public Hotel getHotel() {
-        return hotel;
+    public int getIdCity() {
+        return idCity;
     }
 
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
+    public void setIdCity(int idCity) {
+        this.idCity = idCity;
     }
 
-    public Visa getVisa() {
-        return visa;
+    public int getIdPerson() {
+        return idPerson;
     }
 
-    public void setVisa(Visa visa) {
-        this.visa = visa;
+    public void setIdPerson(int idPerson) {
+        this.idPerson = idPerson;
     }
 
-    public Room getRoom() {
-        return room;
+    public int getIdHotel() {
+        return idHotel;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setIdHotel(int idHotel) {
+        this.idHotel = idHotel;
+    }
+
+    public int getIdVisa() {
+        return idVisa;
+    }
+
+    public void setIdVisa(int idVisa) {
+        this.idVisa = idVisa;
+    }
+
+    public int getIdRoom() {
+        return IdRoom;
+    }
+
+    public void setIdRoom(int idRoom) {
+        IdRoom = idRoom;
     }
 
     @Override
@@ -92,29 +113,34 @@ public class Booking {
         }
         Booking booking = (Booking) o;
         return idBooking == booking.idBooking
-            && Objects.equals(country, booking.country)
-            && Objects.equals(city, booking.city)
-            && Objects.equals(person, booking.person)
-            && Objects.equals(hotel, booking.hotel)
-            && Objects.equals(visa, booking.visa)
-            && Objects.equals(room, booking.room);
+            && idCountry == booking.idCountry
+            && idCity == booking.idCity
+            && idPerson == booking.idPerson
+            && idHotel == booking.idHotel
+            && idVisa == booking.idVisa
+            && IdRoom == booking.IdRoom
+            && Objects.equals(startDate, booking.startDate)
+            && Objects.equals(endDate, booking.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idBooking, country, city, person, hotel, visa, room);
+        return Objects.hash(idBooking, startDate, endDate, idCountry, idCity, idPerson,
+            idHotel, idVisa, IdRoom);
     }
 
     @Override
     public String toString() {
         return "Booking{"
             + "idBooking=" + idBooking
-            + ", country=" + country
-            + ", city=" + city
-            + ", person=" + person
-            + ", hotel=" + hotel
-            + ", visa=" + visa
-            + ", room=" + room
+            + ", startDate=" + startDate
+            + ", endDate=" + endDate
+            + ", idCountry=" + idCountry
+            + ", idCity=" + idCity
+            + ", idPerson=" + idPerson
+            + ", idHotel=" + idHotel
+            + ", idVisa=" + idVisa
+            + ", IdRoom=" + IdRoom
             + '}';
     }
 }
