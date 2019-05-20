@@ -2,7 +2,6 @@ package com.softserve.academy.dreamtour.dao.implementations;
 
 import com.softserve.academy.dreamtour.config.DBConnection;
 import com.softserve.academy.dreamtour.dao.interfaces.IHotelDao;
-import com.softserve.academy.dreamtour.entity.City;
 import com.softserve.academy.dreamtour.entity.Hotel;
 
 import java.sql.Connection;
@@ -10,8 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.naming.NamingException;
 import java.util.List;
+import javax.naming.NamingException;
 
 public class HotelDaoImpl implements IHotelDao {
 
@@ -29,9 +28,7 @@ public class HotelDaoImpl implements IHotelDao {
             hotel.setHotelDescription(set.getString("hotel_description"));
             hotel.setImageUrl(set.getString("image_url"));
             hotel.setStars(set.getInt("stars"));
-            int cityId = set.getInt("city_id");
-            City city = new CityDaoImpl.get(cityId);
-            hotel.setCity(city);
+            hotel.setIdCity(set.getInt("id_city"));
             hotelList.add(hotel);
         }
         statement.close();
@@ -49,35 +46,33 @@ public class HotelDaoImpl implements IHotelDao {
         String hotelDescription = hotel.getHotelDescription();
         String imageUrl = hotel.getImageUrl();
         int stars = hotel.getStars();
-        City city = hotel.getCity();
+        int idCity = hotel.getIdCity();
         statement.setString(1, hotelName);
         statement.setString(2, hotelDescription);
         statement.setString(3, imageUrl);
         statement.setInt(4, stars);
-        statement.setInt(5, city.getCityId());
-        boolean added = statement.execute();
+        statement.setInt(5, idCity);
+        boolean isAdded = statement.execute();
         statement.close();
 
-        return added;
+        return isAdded;
     }
 
     @Override
     public Hotel get(int id) throws SQLException, NamingException {
         String query = "SELECT * FROM hotel WHERE id = ?;";
-        Hotel hotel = new Hotel();
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, id);
         ResultSet set = statement.executeQuery();
+        Hotel hotel = new Hotel();
         while (set.next()) {
             hotel.setIdHotel(set.getInt("id"));
             hotel.setHotelName(set.getString("hotel_name"));
             hotel.setHotelDescription(set.getString("hotel_description"));
             hotel.setImageUrl(set.getString("image_url"));
             hotel.setStars(set.getInt("stars"));
-            int cityId = set.getInt("city_id");
-            City city = new CityDaoImpl.get(cityId);
-            hotel.setCity(city);
+            hotel.setIdCity(set.getInt("city_id"));
         }
         statement.close();
 
@@ -86,26 +81,26 @@ public class HotelDaoImpl implements IHotelDao {
 
     @Override
     public boolean update(Hotel hotel) throws SQLException, NamingException {
-        String query = "UPDATE city SET hotel_name=?, hotel_description=? image_url=? stars=? "
-            + "id_city=? WHERE id=?";
+        String query = "UPDATE hotel SET hotel_name = ?, hotel_description = ?, image_url = ?, "
+            + "stars = ?, id_city = ? WHERE id = ?";
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
-        int hotelId = hotel.getIdHotel();
+        int idHotel = hotel.getIdHotel();
         String hotelName = hotel.getHotelName();
         String hotelDescription = hotel.getHotelDescription();
         String imageUrl = hotel.getImageUrl();
         int stars = hotel.getStars();
-        City city = hotel.getCity();
+        int idCity = hotel.getIdCity();
         statement.setString(1, hotelName);
         statement.setString(2, hotelDescription);
         statement.setString(3, imageUrl);
         statement.setInt(4, stars);
-        statement.setInt(5, city.getCityId());
-        statement.setInt(6, hotelId);
-        boolean updated = statement.execute();
+        statement.setInt(5, idCity);
+        statement.setInt(6, idHotel);
+        boolean isUpdated = statement.execute();
         statement.close();
 
-        return updated;
+        return isUpdated;
     }
 
     @Override
@@ -114,9 +109,9 @@ public class HotelDaoImpl implements IHotelDao {
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, id);
-        boolean deleted = statement.execute();
+        boolean isDeleted = statement.execute();
         statement.close();
 
-        return deleted;
+        return isDeleted;
     }
 }

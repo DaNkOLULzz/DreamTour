@@ -7,18 +7,23 @@ import java.util.Objects;
 public class Room {
 
     private int idRoom;
-    private Integer price;
+    private String imageUrl;
+    private String roomDescription;
+    private int price;
     private RoomType roomType;
-    private Hotel hotel;
+    private int idHotel;
 
     public Room() {
     }
 
-    public Room(int idRoom, int price, RoomType roomType, Hotel hotel) {
+    public Room(int idRoom, String imageUrl, String roomDescription, int price,
+                RoomType roomType, int idHotel) {
         this.idRoom = idRoom;
+        this.imageUrl = imageUrl;
+        this.roomDescription = roomDescription;
         this.price = price;
         this.roomType = roomType;
-        this.hotel = hotel;
+        this.idHotel = idHotel;
     }
 
     public int getIdRoom() {
@@ -27,6 +32,22 @@ public class Room {
 
     public void setIdRoom(int idRoom) {
         this.idRoom = idRoom;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getRoomDescription() {
+        return roomDescription;
+    }
+
+    public void setRoomDescription(String roomDescription) {
+        this.roomDescription = roomDescription;
     }
 
     public int getPrice() {
@@ -45,12 +66,12 @@ public class Room {
         this.roomType = roomType;
     }
 
-    public Hotel getHotel() {
-        return hotel;
+    public int getIdHotel() {
+        return idHotel;
     }
 
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
+    public void setIdHotel(int idHotel) {
+        this.idHotel = idHotel;
     }
 
     @Override
@@ -62,24 +83,28 @@ public class Room {
             return false;
         }
         Room room = (Room) o;
-        return price == room.price
-            && idRoom == room.idRoom
-            && roomType == room.roomType
-            && Objects.equals(hotel, room.hotel);
+        return idRoom == room.idRoom
+            && price == room.price
+            && idHotel == room.idHotel
+            && Objects.equals(imageUrl, room.imageUrl)
+            && Objects.equals(roomDescription, room.roomDescription)
+            && roomType == room.roomType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idRoom, price, roomType, hotel);
+        return Objects.hash(idRoom, imageUrl, roomDescription, price, roomType, idHotel);
     }
 
     @Override
     public String toString() {
         return "Room{"
             + "idRoom=" + idRoom
+            + ", imageUrl='" + imageUrl + '\''
+            + ", roomDescription='" + roomDescription + '\''
             + ", price=" + price
             + ", roomType=" + roomType
-            + ", hotel=" + hotel
+            + ", idHotel=" + idHotel
             + '}';
     }
 }
