@@ -39,7 +39,7 @@ public class HotelDaoImpl implements IHotelDao {
     @Override
     public boolean add(Hotel hotel) throws SQLException, NamingException {
         String query = "INSERT INTO hotel (hotel_name, hotel_description, image_url, stars, "
-            + "id_city) VALUES(?, ?, ?, ?, ?)";
+                + "id_city) VALUES(?, ?, ?, ?, ?)";
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         String hotelName = hotel.getHotelName();
@@ -82,7 +82,7 @@ public class HotelDaoImpl implements IHotelDao {
     @Override
     public boolean update(Hotel hotel) throws SQLException, NamingException {
         String query = "UPDATE hotel SET hotel_name = ?, hotel_description = ?, image_url = ?, "
-            + "stars = ?, id_city = ? WHERE id = ?";
+                + "stars = ?, id_city = ? WHERE id = ?";
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         int idHotel = hotel.getIdHotel();
@@ -113,5 +113,21 @@ public class HotelDaoImpl implements IHotelDao {
         statement.close();
 
         return isDeleted;
+    }
+
+    @Override
+    public int[] hotelStatistics(String hotelName) throws SQLException, NamingException {
+        int[] statData = new int[2];
+        String query = "select count(booking.id), avg(datediff(booking.endDate, booking.startDate))" +
+                "from booking where booking.id_hotel=(select hotel.id from hotel where hotel_name=?)";
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, hotelName);
+        ResultSet set = statement.executeQuery();
+        while (set.next()){
+            statData[0] = set.getInt(1);
+            statData[1] = set.getInt(2);
+        }
+        return statData;
     }
 }
