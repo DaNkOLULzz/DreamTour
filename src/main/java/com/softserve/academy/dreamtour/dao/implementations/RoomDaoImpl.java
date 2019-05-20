@@ -29,7 +29,7 @@ public class RoomDaoImpl implements IRoomDao {
             room.setImageUrl(set.getString("image_url"));
             room.setRoomDescription(set.getString("room_description"));
             room.setPrice(set.getInt("price"));
-            room.setRoomType(RoomType.values()[set.getInt("id_room_type")]);
+            room.setRoomType(RoomType.values()[set.getInt("id_room_type") - 1]);
             room.setIdHotel(set.getInt("id_hotel"));
             roomList.add(room);
         }
@@ -73,7 +73,7 @@ public class RoomDaoImpl implements IRoomDao {
             room.setImageUrl(set.getString("image_url"));
             room.setRoomDescription(set.getString("room_description"));
             room.setPrice(set.getInt("price"));
-            room.setRoomType(RoomType.values()[set.getInt("id_room_type")]);
+            room.setRoomType(RoomType.values()[set.getInt("id_room_type") - 1]);
             room.setIdHotel(set.getInt("id_hotel"));
         }
         statement.close();
