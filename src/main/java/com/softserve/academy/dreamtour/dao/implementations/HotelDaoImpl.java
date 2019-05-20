@@ -37,6 +37,30 @@ public class HotelDaoImpl implements IHotelDao {
     }
 
     @Override
+    public List<Hotel> getHotelsByCityName(String cityName) throws SQLException, NamingException {
+        String query = "SELECT hotel_name, hotel_description, image_url, stars FROM hotel "
+            + "WHERE id_city = (SELECT id FROM city WHERE city_name = ?);";
+        ArrayList<Hotel> hotelList = new ArrayList<>();
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, cityName);
+        ResultSet set = statement.executeQuery();
+        while (set.next()) {
+            Hotel hotel = new Hotel();
+            hotel.setIdHotel(set.getInt("id"));
+            hotel.setHotelName(set.getString("hotel_name"));
+            hotel.setHotelDescription(set.getString("hotel_description"));
+            hotel.setImageUrl(set.getString("image_url"));
+            hotel.setStars(set.getInt("stars"));
+            hotel.setIdCity(set.getInt("id_city"));
+            hotelList.add(hotel);
+        }
+        statement.close();
+
+        return hotelList;
+    }
+
+    @Override
     public boolean add(Hotel hotel) throws SQLException, NamingException {
         String query = "INSERT INTO hotel (hotel_name, hotel_description, image_url, stars, "
                 + "id_city) VALUES(?, ?, ?, ?, ?)";
@@ -115,6 +139,7 @@ public class HotelDaoImpl implements IHotelDao {
         return isDeleted;
     }
 
+
     @Override
     public int[] hotelStatistics(String hotelName) throws SQLException, NamingException {
         int[] statData = new int[2];
@@ -130,4 +155,5 @@ public class HotelDaoImpl implements IHotelDao {
         }
         return statData;
     }
+
 }

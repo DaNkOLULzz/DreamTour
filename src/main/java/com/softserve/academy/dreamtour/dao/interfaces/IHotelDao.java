@@ -2,11 +2,14 @@ package com.softserve.academy.dreamtour.dao.interfaces;
 
 import com.softserve.academy.dreamtour.entity.Hotel;
 
-import javax.naming.NamingException;
+
 import java.sql.SQLException;
+import java.util.List;
+import javax.naming.NamingException;
+
 
 public interface IHotelDao extends IDao<Hotel> {
-
+    List<Hotel> getHotelsByCityName(String cityName) throws SQLException, NamingException;
     int[] hotelStatistics(String hotelName) throws SQLException, NamingException;
 
 }
