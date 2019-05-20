@@ -2,7 +2,7 @@ package com.softserve.academy.dreamtour.dao.implementations;
 
 import com.softserve.academy.dreamtour.config.DBConnection;
 import com.softserve.academy.dreamtour.dao.interfaces.IVisaDao;
-import com.softserve.academy.dreamtour.entity.City;
+import com.softserve.academy.dreamtour.entity.Person;
 import com.softserve.academy.dreamtour.entity.Visa;
 
 import java.sql.PreparedStatement;
@@ -119,6 +119,34 @@ public class VisaDaoImpl implements IVisaDao {
         ps.close();
 
         return isDeleted;
+    }
+
+    @Override
+    public List<Visa> getAllVisaByPerson(int idPerson) throws SQLException, NamingException {
+
+        ArrayList<Visa> visaList = new ArrayList<>();
+
+        String sql = "SELECT DISTINCT endDate, id_tourist, id_country from visa, person " 
+                + "where visa.id_tourist = ?";
+
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+        ps.setInt(1, idPerson);
+
+        ResultSet rs = ps.executeQuery(sql);
+
+        while (rs.next()) {
+
+            Visa visa = new Visa();
+            visa.setIdVisa(rs.getInt("id"));
+            visa.setEndDate(rs.getDate("endDate"));
+            visa.setIdPerson(rs.getInt("id_tourist"));
+            visa.setIdCountry(rs.getInt("id_country"));
+            visaList.add(visa);
+        }
+        ps.close();
+
+        return visaList;
+
     }
 
 }
