@@ -89,4 +89,20 @@ public class CountryDaoImpl implements ICountryDao {
         return deleted;
 
     }
+
+    @Override
+    public List<String> getCountryByPerson(int personId) throws SQLException {
+        ArrayList<String> countryList = new ArrayList<>();
+        String query = "select country.country_name \n" +
+                "from country, booking \n" +
+                "where booking.id_country=country.id and booking.id_tourist =?";
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setInt(1, personId);
+        ResultSet set = statement.executeQuery();
+        while (set.next()) {
+            String countryName = set.getString("country_name");
+            countryList.add(countryName);
+        }
+        return countryList;
+    }
 }
