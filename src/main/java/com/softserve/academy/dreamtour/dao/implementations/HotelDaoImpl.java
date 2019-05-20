@@ -38,7 +38,7 @@ public class HotelDaoImpl implements IHotelDao {
 
     @Override
     public List<Hotel> getHotelsByCityName(String cityName) throws SQLException, NamingException {
-        String query = "SELECT hotel_name, hotel_description, image_url, stars FROM hotel "
+        String query = "SELECT id, hotel_name, hotel_description, image_url, stars FROM hotel "
             + "WHERE id_city = (SELECT id FROM city WHERE city_name = ?);";
         ArrayList<Hotel> hotelList = new ArrayList<>();
         Connection connection = DBConnection.getConnection();
@@ -52,7 +52,6 @@ public class HotelDaoImpl implements IHotelDao {
             hotel.setHotelDescription(set.getString("hotel_description"));
             hotel.setImageUrl(set.getString("image_url"));
             hotel.setStars(set.getInt("stars"));
-            hotel.setIdCity(set.getInt("id_city"));
             hotelList.add(hotel);
         }
         statement.close();
