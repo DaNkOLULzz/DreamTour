@@ -2,8 +2,6 @@ package com.softserve.academy.dreamtour.dao.implementations;
 
 import com.softserve.academy.dreamtour.config.DBConnection;
 import com.softserve.academy.dreamtour.dao.interfaces.IVisaDao;
-import com.softserve.academy.dreamtour.entity.City;
-import com.softserve.academy.dreamtour.entity.Person;
 import com.softserve.academy.dreamtour.entity.Visa;
 
 import java.sql.PreparedStatement;
@@ -40,9 +38,27 @@ public class VisaDaoImpl implements IVisaDao {
         return visaList;
     }
 
+    @Override
+    public int getVisaCountByCountryForPerson(
+        String countryName, int idPerson) throws SQLException, NamingException {
+
+        String sql = "SELECT COUNT(id) AS count FROM visa WHERE id_country = "
+            + "(SELECT id FROM country WHERE country_name = ?) AND id_tourist = ?;";
+
+        PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
+        statement.setString(1, countryName);
+        statement.setInt(2, idPerson);
+        ResultSet rs = statement.executeQuery(sql);
+        int visaCount = rs.getInt("count");
+        statement.close();
+
+        return visaCount;
+    }
+
     public boolean add(Visa visa) throws SQLException, NamingException {
 
-        String sql = "INSERT INTO Visa (endDate, id_tourist, id_country) " + "VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Visa (endDate, id_tourist, id_country) "
+            + "VALUES (?, ?, ?)";
 
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
         ps.setDate(1, visa.getEndDate());
