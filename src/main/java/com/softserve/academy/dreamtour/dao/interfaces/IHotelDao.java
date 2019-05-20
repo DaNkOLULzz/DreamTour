@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
 
-
 public interface IHotelDao extends IDao<Hotel> {
     List<Hotel> getHotelsByCityName(String cityName) throws SQLException, NamingException;
 }
