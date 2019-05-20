@@ -2,7 +2,6 @@ package com.softserve.academy.dreamtour.dao.implementations;
 
 import com.softserve.academy.dreamtour.config.DBConnection;
 import com.softserve.academy.dreamtour.dao.interfaces.IVisaDao;
-import com.softserve.academy.dreamtour.entity.Person;
 import com.softserve.academy.dreamtour.entity.Visa;
 
 import java.sql.PreparedStatement;
