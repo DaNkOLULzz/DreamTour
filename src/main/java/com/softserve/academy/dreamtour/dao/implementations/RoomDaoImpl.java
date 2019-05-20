@@ -39,6 +39,28 @@ public class RoomDaoImpl implements IRoomDao {
     }
 
     @Override
+    public List<Room> getFreeRoomsInHotel(int idHotel) throws SQLException, NamingException {
+        String query = "SELECT * FROM room;";
+        ArrayList<Room> roomList = new ArrayList<>();
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(query);
+        ResultSet set = statement.executeQuery();
+        while (set.next()) {
+            Room room = new Room();
+            room.setIdRoom(set.getInt("id"));
+            room.setImageUrl(set.getString("image_url"));
+            room.setRoomDescription(set.getString("room_description"));
+            room.setPrice(set.getInt("price"));
+            room.setRoomType(RoomType.values()[set.getInt("id_room_type") - 1]);
+            room.setIdHotel(set.getInt("id_hotel"));
+            roomList.add(room);
+        }
+        statement.close();
+
+        return roomList;
+    }
+
+    @Override
     public boolean add(Room room) throws SQLException, NamingException {
         String query = "INSERT INTO room (image_url, room_description, price, id_room_type, "
             + "id_hotel) VALUES(?, ?, ?, ?, ?)";
@@ -116,4 +138,5 @@ public class RoomDaoImpl implements IRoomDao {
 
         return isDeleted;
     }
+
 }
