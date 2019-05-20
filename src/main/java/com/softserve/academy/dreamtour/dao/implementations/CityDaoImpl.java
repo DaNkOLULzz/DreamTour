@@ -3,7 +3,6 @@ package com.softserve.academy.dreamtour.dao.implementations;
 import com.softserve.academy.dreamtour.config.DBConnection;
 import com.softserve.academy.dreamtour.dao.interfaces.ICityDao;
 import com.softserve.academy.dreamtour.entity.City;
-import com.softserve.academy.dreamtour.entity.Country;
 
 import javax.naming.NamingException;
 import java.sql.*;
@@ -91,5 +90,19 @@ public class CityDaoImpl implements ICityDao {
         deleted = statement.execute();
         statement.close();
         return deleted;
+    }
+
+    @Override
+    public List<String> getCityNameByCountry(String countryName) throws SQLException {
+        ArrayList<String> cityList = new ArrayList<>();
+        String query = "SELECT city_name FROM city, country WHERE country.country_name=? AND city.id_country=country.id";
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setString(1, countryName);
+        ResultSet set = statement.executeQuery();
+        while (set.next()) {
+            String cityName = set.getString("city_name");
+            cityList.add(cityName);
+        }
+        return cityList;
     }
 }
