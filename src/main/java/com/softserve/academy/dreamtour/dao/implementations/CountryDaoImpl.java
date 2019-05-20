@@ -91,7 +91,7 @@ public class CountryDaoImpl implements ICountryDao {
     }
 
     @Override
-    public List<String> getCountryByPerson(int personId) throws SQLException {
+    public List<String> getCountryNameByPerson(int personId) throws SQLException {
         ArrayList<String> countryList = new ArrayList<>();
         String query = "select country.country_name \n" +
                 "from country, booking \n" +

@@ -93,7 +93,7 @@ public class CityDaoImpl implements ICityDao {
     }
 
     @Override
-    public List<String> getCityByCountry(String countryName) throws SQLException {
+    public List<String> getCityNameByCountry(String countryName) throws SQLException {
         ArrayList<String> cityList = new ArrayList<>();
         String query = "SELECT city_name FROM city, country WHERE country.country_name=? AND city.id_country=country.id";
         PreparedStatement statement = con.prepareStatement(query);

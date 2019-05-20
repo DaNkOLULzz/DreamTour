@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ICountryDao extends IDao<Country> {
 
-    List<String> getCountryByPerson(int personId) throws SQLException;
+    List<String> getCountryNameByPerson(int personId) throws SQLException;
 }

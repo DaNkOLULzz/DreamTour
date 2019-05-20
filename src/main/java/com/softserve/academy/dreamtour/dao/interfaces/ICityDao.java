@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ICityDao extends  IDao<City>{
 
-    List<String> getCityByCountry(String countryName) throws SQLException, NamingException;
+    List<String> getCityNameByCountry(String countryName) throws SQLException, NamingException;
 }
