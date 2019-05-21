@@ -29,7 +29,29 @@ public class RoomDaoImpl implements IRoomDao {
             room.setImageUrl(set.getString("image_url"));
             room.setRoomDescription(set.getString("room_description"));
             room.setPrice(set.getInt("price"));
-            room.setRoomType(RoomType.values()[set.getInt("id_room_type") - 1]);
+            room.setRoomType(RoomType.valueOf(set.getString("room_type")));
+            room.setIdHotel(set.getInt("id_hotel"));
+            roomList.add(room);
+        }
+        statement.close();
+
+        return roomList;
+    }
+
+    @Override
+    public List<Room> getFreeRoomsInHotel(int idHotel) throws SQLException, NamingException {
+        String query = "SELECT * FROM room;";
+        ArrayList<Room> roomList = new ArrayList<>();
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(query);
+        ResultSet set = statement.executeQuery();
+        while (set.next()) {
+            Room room = new Room();
+            room.setIdRoom(set.getInt("id"));
+            room.setImageUrl(set.getString("image_url"));
+            room.setRoomDescription(set.getString("room_description"));
+            room.setPrice(set.getInt("price"));
+            room.setRoomType(RoomType.valueOf(set.getString("room_type")));
             room.setIdHotel(set.getInt("id_hotel"));
             roomList.add(room);
         }
@@ -47,12 +69,12 @@ public class RoomDaoImpl implements IRoomDao {
         String imageUrl = room.getImageUrl();
         String roomDescription = room.getRoomDescription();
         int price = room.getPrice();
-        int idRoomType = room.getRoomType().ordinal() + 1;
+        RoomType roomType = room.getRoomType();
         int idHotel = room.getIdHotel();
         statement.setString(1, imageUrl);
         statement.setString(2, roomDescription);
         statement.setInt(3, price);
-        statement.setInt(4, idRoomType);
+        statement.setString(4, roomType.toString());
         statement.setInt(5, idHotel);
         boolean isAdded = statement.execute();
         statement.close();
@@ -73,7 +95,7 @@ public class RoomDaoImpl implements IRoomDao {
             room.setImageUrl(set.getString("image_url"));
             room.setRoomDescription(set.getString("room_description"));
             room.setPrice(set.getInt("price"));
-            room.setRoomType(RoomType.values()[set.getInt("id_room_type") - 1]);
+            room.setRoomType(RoomType.valueOf(set.getString("room_type")));
             room.setIdHotel(set.getInt("id_hotel"));
         }
         statement.close();
@@ -91,12 +113,12 @@ public class RoomDaoImpl implements IRoomDao {
         String imageUrl = room.getImageUrl();
         String roomDescription = room.getRoomDescription();
         int price = room.getPrice();
-        int idRoomType = room.getRoomType().ordinal() + 1;
+        RoomType roomType = room.getRoomType();
         int idHotel = room.getIdHotel();
         statement.setString(1, imageUrl);
         statement.setString(2, roomDescription);
         statement.setInt(3, price);
-        statement.setInt(4, idRoomType);
+        statement.setString(4, roomType.toString());
         statement.setInt(5, idHotel);
         statement.setInt(6, idRoom);
         boolean isUpdated = statement.execute();
@@ -116,4 +138,5 @@ public class RoomDaoImpl implements IRoomDao {
 
         return isDeleted;
     }
+
 }

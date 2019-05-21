@@ -33,6 +33,7 @@ public class PersonDaoImpl implements IPersonDao {
             person.setUsername(rs.getString("username"));
             person.setPassword(rs.getString("pass"));
             person.setFirstName(rs.getString("first_name"));
+            person.setLastName(rs.getString("last_name"));
             person.setPersonType(PersonType.valueOf(rs.getString("person_type")));
             
             personList.add(person);
