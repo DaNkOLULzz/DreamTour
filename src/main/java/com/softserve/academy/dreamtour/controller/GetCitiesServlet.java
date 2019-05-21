@@ -1,8 +1,7 @@
 package com.softserve.academy.dreamtour.controller;
 
-import com.softserve.academy.dreamtour.dao.implementations.CityDaoImpl;
-import com.softserve.academy.dreamtour.dao.interfaces.ICityDao;
-import com.softserve.academy.dreamtour.entity.City;
+import com.softserve.academy.dreamtour.service.implementations.CityServiceImpl;
+import com.softserve.academy.dreamtour.service.interfaces.ICityService;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @WebServlet("/GetCitiesServlet")
 public class GetCitiesServlet extends HttpServlet {
 
@@ -28,12 +28,12 @@ public class GetCitiesServlet extends HttpServlet {
 
         try {
 
-            ICityDao cityDao = new CityDaoImpl();
+            ICityService cityService = new CityServiceImpl();
             List<String> cityList = null;
 
             if (chosenCountry.equals("allCountries") == false) {
 
-                cityList = (ArrayList<String>) cityDao.getCityNameByCountry(chosenCountry);
+                cityList = (ArrayList<String>) cityService.getCityNameByCountry(chosenCountry);
                 System.out.println(chosenCountry);
                 System.out.println(cityList.toString());
             } else {
