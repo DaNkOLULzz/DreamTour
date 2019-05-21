@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 
 <head>
@@ -7,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="colorlib.com">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="css/index.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
@@ -24,49 +26,25 @@
     </div>
 
     <div class="s002">
-    <select id="type">
-    <option value="item1">item1</option>
-    <option value="item2">item2</option>
-    <option value="item3">item3</option>
-</select>
 
-<select id="size">
-    <option value="">-- select one -- </option>
-</select>
         <form method="POST" action="/main">
             <fieldset>
-                <legend>SEARCH HOTEL</legend>
+                <legend>Choose the Trip of Your Dream</legend>
             </fieldset>
 
             <div class="inner-form">
                 <div class="input-field fouth-wrap">
-                    <div class="icon-wrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <path
-                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z">
-                            </path>
-                        </svg>
-                    </div>
-                    <select data-trigger="" name="choices-single-defaul">
-                        <option placeholder="">China</option>
-                        <option>France</option>
-                        <option>Turkey</option>
-                        <option>USA</option>
+                    <select id="countrySelection" name="choices-single-defaul">
+                        <option value="allCountries">All Countries</option>
+                        <option value="China">China</option>
+                        <option value="France">France</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="USA">USA</option>
                     </select>
                 </div>
                 <div class="input-field fouth-wrap">
-                    <div class="icon-wrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <path
-                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z">
-                            </path>
-                        </svg>
-                    </div>
-                    <select data-trigger="" name="choices-single-defaul">
-                        <option placeholder="">2 Adults</option>
-                        <option>3 Adults</option>
-                        <option>4 Adults</option>
-                        <option>5 Adults</option>
+                    <select  name="choices-single-defaul" id="citySelection">
+                        <option value="">All Cities</option>
                     </select>
                 </div>
                 <div class="input-field second-wrap">
@@ -89,7 +67,7 @@
                     </div>
                     <input class="datepicker" id="return" type="text" placeholder="30 Aug 2018" />
                 </div>
-                
+
                 <div class="input-field fifth-wrap">
                     <button class="btn-search" type="button">SEARCH</button>
                 </div>
@@ -108,23 +86,38 @@
         });
     </script>
     <script>
-    $(document).ready(function() {
+        $(document).ready(function () {
 
-        $("#type").change(function() {
-            var val = $(this).val();
-            if (val == "item1") {
-                $("#size").html("<option value='test'>item1: test 1</option><option value='test2'>item1: test 2</option>");
-            } else if (val == "item2") {
-                $("#size").html("<option value='test'>item2: test 1</option><option value='test2'>item2: test 2</option>");
+            $("#countrySelection").change(function () {
 
-            } else if (val == "item3") {
-                $("#size").html("<option value='test'>item3: test 1</option><option value='test2'>item3: test 2</option>");
+                var e = document.getElementById("countrySelection");
+                var chosenCountry = e.options[e.selectedIndex].value;
+	
+                let cityList;
+                
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "/GetCitiesServlet",
+                    data: { country: chosenCountry }
+                }).done(function (response) {
+                	cityList = response.split(" ");
+                }).fail(function (response) {
+                	alert(response);
+                });
+				
+                let cityListHtml = "";
+                for (var i = 0; i < cityList.length; i++) {
+					console.log(cityList[i]);
+                	cityListHtml += "<option value=\'" + cityList[i] + "\'>" + cityList[i] + "</option>";
+                }
+                
+                $("#citySelection").html(cityListHtml);
+            });
 
-            }
+
         });
-
-
-    });</script>
+    </script>
     <script>
         function myFunction() {
             var x = document.getElementById("myTopnav");

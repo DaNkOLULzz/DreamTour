@@ -46,7 +46,7 @@ public class RegistrationServlet extends HttpServlet {
             e.printStackTrace();
         }
         
-        response.sendRedirect("/main");
+        response.sendRedirect("/");
     }
 
 }
