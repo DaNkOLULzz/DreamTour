@@ -36,6 +36,24 @@ public class CountryDaoImpl implements ICountryDao {
     }
 
     @Override
+    public List<String> getAllNames() throws SQLException {
+
+        ArrayList<String> countryNameList = new ArrayList<>();
+
+        String query = "SELECT country_name FROM country";
+
+        Statement statement = con.createStatement();
+        ResultSet rs = statement.executeQuery(query);
+
+        while (rs.next()) {
+            countryNameList.add(rs.getString("country_name"));
+        }
+        statement.close();
+        
+        return countryNameList;
+    }
+
+    @Override
     public boolean add(Country country) throws SQLException {
         String query = "INSERT INTO country (country_name) VALUES (?)";
         boolean added = false;
@@ -93,9 +111,8 @@ public class CountryDaoImpl implements ICountryDao {
     @Override
     public List<String> getCountryNameByPerson(int personId) throws SQLException {
         ArrayList<String> countryList = new ArrayList<>();
-        String query = "select country.country_name \n" +
-                "from country, booking \n" +
-                "where booking.id_country=country.id and booking.id_tourist =?";
+        String query = "select country.country_name \n" + "from country, booking \n"
+                + "where booking.id_country=country.id and booking.id_tourist =?";
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, personId);
         ResultSet set = statement.executeQuery();
