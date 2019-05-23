@@ -93,6 +93,19 @@ public class CityDaoImpl implements ICityDao {
     }
 
     @Override
+    public List<String> getAllCityNames() throws SQLException, NamingException {
+        ArrayList<String> cityList = new ArrayList<>();
+        String query = "SELECT city_name FROM city";
+        Statement statement = con.createStatement();
+        ResultSet set = statement.executeQuery(query);
+        while (set.next()) {
+            String cityName = set.getString("city_name");
+            cityList.add(cityName);
+        }
+        return cityList;
+    }
+
+    @Override
     public List<String> getCityNameByCountry(String countryName) throws SQLException {
         ArrayList<String> cityList = new ArrayList<>();
         String query = "SELECT city_name FROM city, country WHERE country.country_name=? AND city.id_country=country.id";

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GetCitiesServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
 
