@@ -19,4 +19,6 @@ public interface ICountryService {
     boolean delete(int id) throws SQLException, NamingException; // D
 
     List<String> getCountryNameByPerson(int personId) throws SQLException;
+
+    List<String> getAllNames() throws SQLException;
 }

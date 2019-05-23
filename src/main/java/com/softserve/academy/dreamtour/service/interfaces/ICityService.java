@@ -2,9 +2,10 @@ package com.softserve.academy.dreamtour.service.interfaces;
 
 import com.softserve.academy.dreamtour.entity.City;
 
-import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
+import javax.naming.NamingException;
+
 
 public interface ICityService {
 

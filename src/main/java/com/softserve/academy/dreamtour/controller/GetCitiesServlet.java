@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GetCitiesServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
 
@@ -36,11 +36,10 @@ public class GetCitiesServlet extends HttpServlet {
                 cityList = (ArrayList<String>) cityService.getCityNameByCountry(chosenCountry);
                 System.out.println(chosenCountry);
                 System.out.println(cityList.toString());
-            } else {
-
-                // cityList = (ArrayList<String>) cityDao.getCityName(chosenCountry);
             }
+            
             StringBuilder cityNames = new StringBuilder();
+
             for (String cityName : cityList) {
                 cityNames.append(cityName + " ");
             }

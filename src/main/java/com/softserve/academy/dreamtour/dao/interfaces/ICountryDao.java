@@ -9,5 +9,7 @@ public interface ICountryDao extends IDao<Country> {
 
     List<String> getCountryNameByPerson(int personId) throws SQLException;
 
-    List<String> getCountryName() throws SQLException;
+
+    List<String> getAllNames() throws SQLException;
+
 }

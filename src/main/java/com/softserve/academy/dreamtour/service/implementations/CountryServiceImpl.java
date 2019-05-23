@@ -46,4 +46,9 @@ public class CountryServiceImpl implements ICountryService {
     public List<String> getCountryNameByPerson(int personId) throws SQLException {
         return dao.getCountryNameByPerson(personId);
     }
+
+    @Override
+    public List<String> getAllNames() throws SQLException {
+        return dao.getAllNames();
+    }
 }
