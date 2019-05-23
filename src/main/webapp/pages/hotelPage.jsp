@@ -8,18 +8,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>HotelName</title>
+    <link rel="stylesheet" type="text/css" href="../css/hotelPage.css">
+    <title>${hotel.hotelName}</title>
 </head>
 <body>
-    <div id="images">
-        <h1>Слайдер</h1>
-    </div>
-    <div id="rooms">
-        <h1>Список вільних кімнат</h1>
-    </div>
-    <input id="submit" type="submit" name="Book">
-    <div id="desc">
-        <h1>Опис готелю</h1>
-    </div>
+<div id="images">
+    <p>
+        ${hotel.imageUrl}
+    </p>
+</div>
+<div id="rooms">
+    <h1>Список вільних кімнат</h1>
+</div>
+<input id="submit" type="submit" name="Book">
+<div id="desc">
+    <p>
+        ${hotel.hotelDescription}
+    </p>
+</div>
 </body>
 </html>
