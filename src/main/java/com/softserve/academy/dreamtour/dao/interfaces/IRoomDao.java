@@ -7,5 +7,5 @@ import java.util.List;
 import javax.naming.NamingException;
 
 public interface IRoomDao extends IDao<Room> {
-    List<Room> getFreeRoomsInHotel(int idHotel) throws SQLException, NamingException;
+    List<Room> getFreeRoomsInHotel(String startDate, String endDate, int idHotel) throws SQLException, NamingException;
 }
