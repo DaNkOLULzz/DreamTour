@@ -13,7 +13,8 @@ html {
  * Remove the margin in all browsers (opinionated).
  */
 body {
-	margin: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /**
@@ -1895,11 +1896,6 @@ to {
 	}
 }
 
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 #countrySelection, #citySelection {
 	height: 70px;
 	background: #fff;
@@ -1912,6 +1908,7 @@ body {
 	color: #555;
 	font-weight: 400;
 	font-family: 'Poppins', sans-serif;
+	cursor: pointer;
 }
 
 .topnav {
@@ -1955,6 +1952,7 @@ body {
     right: 0;
     top: 0;
   }
+  
   .topnav.responsive a {
     float: none;
     display: block;
