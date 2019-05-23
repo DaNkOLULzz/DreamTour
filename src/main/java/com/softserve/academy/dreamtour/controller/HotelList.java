@@ -41,8 +41,8 @@ public class HotelList extends HttpServlet {
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
 
-        LocalDate sDate = DateUtils.dateParser(startDate);
-        LocalDate eDate = DateUtils.dateParser(endDate);
+        /*LocalDate sDate = DateUtils.dateParser(startDate);
+        LocalDate eDate = DateUtils.dateParser(endDate);*/
 
 
         IHotelService hotelService = new HotelServiceImpl();
@@ -53,7 +53,7 @@ public class HotelList extends HttpServlet {
             if (startDate.equals("") && endDate.equals("")) {
                 hotels = hotelService.getAllHotelsByCityName(chosenCity);
             } else {
-                //here will be method checking for available hotels by date
+                hotels = hotelService.getAllAvailableHotels(startDate, endDate);
             }
         } catch (SQLException | NamingException e) {
             e.printStackTrace();

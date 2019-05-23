@@ -10,5 +10,6 @@ public interface IHotelDao extends IDao<Hotel> {
 
     List<Hotel> getAllHotelsByCityName(String cityName) throws SQLException, NamingException;
     int[] hotelStatistics(String hotelName) throws SQLException, NamingException;
+    List<Hotel> getAllAvailableHotels (String startDate, String endDate)throws SQLException, NamingException;
 
 }

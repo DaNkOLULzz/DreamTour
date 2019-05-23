@@ -47,4 +47,9 @@ public class HotelServiceImpl implements IHotelService {
     public int[] hotelStatistics(String hotelName) throws SQLException, NamingException {
         return hotelDao.hotelStatistics(hotelName);
     }
+
+    @Override
+    public List<Hotel> getAllAvailableHotels(String startDate, String endDate) throws SQLException, NamingException {
+        return hotelDao.getAllAvailableHotels(startDate, endDate);
+    }
 }
