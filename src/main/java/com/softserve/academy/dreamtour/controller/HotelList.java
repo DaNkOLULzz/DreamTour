@@ -20,13 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 public class HotelList extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
-            throws ServletException, IOException {
-        
-        //request.getRequestDispatcher("pages/registration.jsp").forward(request, response);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
         
@@ -34,6 +27,7 @@ public class HotelList extends HttpServlet {
         System.out.println(req.getParameter("chosenCity"));
         System.out.println(req.getParameter("startDate"));
         System.out.println(req.getParameter("endDate"));
+        req.getRequestDispatcher("pages/hotelList.jsp").forward(req, resp);
     }
     
 }
