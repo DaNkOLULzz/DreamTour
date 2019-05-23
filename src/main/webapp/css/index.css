@@ -1908,6 +1908,7 @@ to {
 	color: #555;
 	font-weight: 400;
 	font-family: 'Poppins', sans-serif;
+	cursor: pointer;
 }
 
 .topnav {

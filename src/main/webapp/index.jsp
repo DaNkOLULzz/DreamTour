@@ -30,7 +30,7 @@
 
 	<div class="s002">
 
-		<form method="POST" action="${pageContext.request.contextPath}/HotelList">
+		<form method="POST" action="${pageContext.request.contextPath}/HotelList" onsubmit="return validate()">
 			<fieldset>
 				<legend>Choose the Trip of Your Dream</legend>
 			</fieldset>
@@ -38,7 +38,7 @@
 			<div class="inner-form">
 				<div class="input-field fouth-wrap">
 					<select id="countrySelection" name="chosenCountry">
-						<option value="allCountries">All Countries</option>
+						<option value="allCountries">Choose Country</option>
 						<c:forEach var="country" items="${countries}">
 							<option value="${country}"> ${country}</option>
 						</c:forEach>
@@ -46,7 +46,7 @@
 				</div>
 				<div class="input-field fouth-wrap">
 					<select id="citySelection" name="chosenCity">
-						<option value="allCities">All Cities</option>
+						<option value="allCities">Choose City</option>
 					</select>
 				</div>
 				<div class="input-field second-wrap">
@@ -59,7 +59,7 @@
                         </svg>
 					</div>
 					<input class="datepicker" id="depart" type="text"
-						placeholder="29 Aug 2018" name="startDate"/>
+						placeholder="Start Date" name="startDate"/>
 				</div>
 				<div class="input-field third-wrap">
 					<div class="icon-wrap">
@@ -71,7 +71,7 @@
                         </svg>
 					</div>
 					<input class="datepicker" id="return" type="text"
-						placeholder="30 Aug 2018" name="endDate"/>
+						placeholder="End Date" name="endDate"/>
 				</div>
 
 				<div class="input-field fifth-wrap">
@@ -122,7 +122,7 @@
 	                	cityListHtml += "<option value=\'" + cityList[i] + "\'>" + cityList[i] + "</option>";
 	                }
                 } else {
-                	cityListHtml = "<option value=\"allCities\">All Cities</option>";
+                	cityListHtml = "<option value=\"allCities\">Choose City</option>";
                 }
                 
                 $("#citySelection").html(cityListHtml);
@@ -130,6 +130,19 @@
 
 
         });
+    </script>
+    <script>
+        function validate() {
+        	
+        	var chosenCountry = document.getElementById("countrySelection").value;
+        	
+        	if(chosenCountry == "allCountries"){
+        		alert("Please, choose country!");
+        		return false;
+        	} else {
+        		return true;
+        	}
+        }
     </script>
 	<script>
         function myFunction() {
