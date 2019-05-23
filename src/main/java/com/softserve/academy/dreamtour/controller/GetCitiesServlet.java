@@ -36,11 +36,10 @@ public class GetCitiesServlet extends HttpServlet {
                 cityList = (ArrayList<String>) cityService.getCityNameByCountry(chosenCountry);
                 System.out.println(chosenCountry);
                 System.out.println(cityList.toString());
-            } else {
-
-                // cityList = (ArrayList<String>) cityDao.getCityName(chosenCountry);
             }
+            
             StringBuilder cityNames = new StringBuilder();
+
             for (String cityName : cityList) {
                 cityNames.append(cityName + " ");
             }
