@@ -33,15 +33,9 @@ public class HotelListServlet extends HttpServlet {
         String endDate = req.getParameter("endDate");
 
         IHotelService hotelService = null;
+        List<Hotel> hotels = null;
         try {
             hotelService = new HotelServiceImpl();
-        } catch (SQLException | NamingException e) {
-            e.printStackTrace();
-        }
-        List<Hotel> hotels = null;
-
-
-        try {
             if (startDate.equals("") && endDate.equals("")) {
                 hotels = hotelService.getAllHotelsByCityName(chosenCity);
             } else {
