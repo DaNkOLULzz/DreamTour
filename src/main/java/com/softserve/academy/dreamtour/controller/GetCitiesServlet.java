@@ -41,7 +41,7 @@ public class GetCitiesServlet extends HttpServlet {
             StringBuilder cityNames = new StringBuilder();
 
             for (String cityName : cityList) {
-                cityNames.append(cityName + " ");
+                cityNames.append(cityName + ",");
             }
 
             response.getWriter().write(cityNames.substring(0, cityNames.length() - 1));

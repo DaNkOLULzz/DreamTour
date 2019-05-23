@@ -32,7 +32,7 @@
 
 		<form method="POST" action="${pageContext.request.contextPath}/HotelList" onsubmit="return validate()">
 			<fieldset>
-				<legend>Choose the Trip of Your Dream</legend>
+				<legend>You dream - we make</legend>
 			</fieldset>
 			<jsp:include page="${pageContext.request.contextPath}/GetCountriesServlet" />
 			<div class="inner-form">
@@ -112,7 +112,7 @@
                         url: "/GetCitiesServlet",
                         data: { country: chosenCountry }
                     }).done(function (response) {
-                    	cityList = response.split(" ");
+                    	cityList = response.split(",");
                     }).fail(function (response) {
                     	alert(response);
                     });
@@ -135,12 +135,21 @@
         function validate() {
         	
         	var chosenCountry = document.getElementById("countrySelection").value;
+        	var startDate = document.getElementById("depart").value;
+        	var endDate = document.getElementById("return").value;
         	
+        	console.log(startDate)
         	if(chosenCountry == "allCountries"){
         		alert("Please, choose country!");
         		return false;
         	} else {
-        		return true;
+        		
+        		if(endDate != "" && startDate == ""){
+        			alert("Please, choose start Date!")
+        			return false;
+        		} else {
+        			return true;
+        		}
         	}
         }
     </script>

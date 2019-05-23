@@ -1906,6 +1906,7 @@ to {
 	font-size: 16px;
 	color: #555;
 	font-weight: 400;
+	white-space: nowrap;
 	font-family: 'Poppins', sans-serif;
 	cursor: pointer;
 }
