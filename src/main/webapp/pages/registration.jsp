@@ -18,8 +18,7 @@
 			<input type="text" placeholder="Last Name" name="lastName" required> 
 			<input type="text" placeholder="User Name" name="username" required> 
 			<input type="password" placeholder="Password" name="password" required> 
-			<input type="password" placeholder="Confirm Password" 
-				"passwordConfirm" required>
+			<input type="password" placeholder="Confirm Password" name=	"passwordConfirm" required>
 			<hr>
 			<div class="signin">
 				<p>
