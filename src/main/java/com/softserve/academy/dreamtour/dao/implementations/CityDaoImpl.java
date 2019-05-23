@@ -51,10 +51,26 @@ public class CityDaoImpl implements ICityDao {
 
     @Override
     public City get(int id) throws SQLException, NamingException {
-        String query = "SELECT city_name FROM city WHERE city.id = ?";
+        String query = "SELECT * FROM city WHERE city.id = ?";
         City city = new City();
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, id);
+        ResultSet set = statement.executeQuery();
+        while (set.next()) {
+            city.setCityId(set.getInt("id"));
+            city.setCityName(set.getString("country_name"));
+            city.setCountryId(set.getInt("id_country"));
+        }
+        statement.close();
+        return city;
+    }
+
+    @Override
+    public City getCityByName(String cityName) throws SQLException, NamingException {
+        String query = "SELECT * FROM city WHERE city_name = ?";
+        City city = new City();
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setString(1, cityName);
         ResultSet set = statement.executeQuery();
         while (set.next()) {
             city.setCityId(set.getInt("id"));

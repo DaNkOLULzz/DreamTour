@@ -141,7 +141,7 @@ public class HotelDaoImpl implements IHotelDao {
 
 
     @Override
-    public List<Hotel> getAllAvailableHotels(String startDate, String endDate) throws SQLException, NamingException {
+    public List<Hotel> getAllAvailableHotelsInCity(String startDate, String endDate, int cityId) throws SQLException, NamingException {
         String query = "select * from hotel \n" +
                 "where id in(select id_hotel from room where id not in\n" +
                 "(select id_room from booking where not\n" +

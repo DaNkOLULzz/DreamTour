@@ -24,8 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/HotelList")
-public class HotelList extends HttpServlet {
+@WebServlet("/HotelListServlet")
+public class HotelListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -41,11 +41,14 @@ public class HotelList extends HttpServlet {
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
 
-        /*LocalDate sDate = DateUtils.dateParser(startDate);
-        LocalDate eDate = DateUtils.dateParser(endDate);*/
-
-
-        IHotelService hotelService = new HotelServiceImpl();
+        IHotelService hotelService = null;
+        try {
+            hotelService = new HotelServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
         List<Hotel> hotels = null;
 
 
@@ -53,7 +56,7 @@ public class HotelList extends HttpServlet {
             if (startDate.equals("") && endDate.equals("")) {
                 hotels = hotelService.getAllHotelsByCityName(chosenCity);
             } else {
-                hotels = hotelService.getAllAvailableHotels(startDate, endDate);
+                hotels = hotelService.getAllAvailableHotelsInCity(startDate, endDate, chosenCity);
             }
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
