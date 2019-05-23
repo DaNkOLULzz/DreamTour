@@ -132,6 +132,7 @@ public class CityDaoImpl implements ICityDao {
             String cityName = set.getString("city_name");
             cityList.add(cityName);
         }
+        statement.close();
         return cityList;
     }
 }

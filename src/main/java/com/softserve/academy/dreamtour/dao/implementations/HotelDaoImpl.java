@@ -103,6 +103,8 @@ public class HotelDaoImpl implements IHotelDao {
         return hotel;
     }
 
+
+
     @Override
     public boolean update(Hotel hotel) throws SQLException, NamingException {
         String query = "UPDATE hotel SET hotel_name = ?, hotel_description = ?, image_url = ?, "
@@ -186,6 +188,7 @@ public class HotelDaoImpl implements IHotelDao {
             statData[0] = set.getInt(1);
             statData[1] = set.getInt(2);
         }
+        statement.close();
         return statData;
     }
 
