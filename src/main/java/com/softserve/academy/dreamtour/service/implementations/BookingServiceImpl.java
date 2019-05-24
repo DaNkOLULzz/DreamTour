@@ -11,7 +11,11 @@ import javax.naming.NamingException;
 
 public class BookingServiceImpl implements IBookingService {
 
-    private IBookingDao bookingDao = new BookingDaoImpl();
+    private IBookingDao bookingDao;
+
+    public BookingServiceImpl() throws SQLException, NamingException{
+        bookingDao = new BookingDaoImpl();
+    }
 
     @Override
     public List<Booking> getAll() throws SQLException, NamingException {

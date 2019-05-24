@@ -14,7 +14,7 @@
 <body>
 <div id="images">
     <p>
-        ${hotel.imageUrl}
+        <img width="40%" height="300px" src="https://photos.google.com/photo/AF1QipMtwj8eMMoEYzMN4jaB_OHdA7eWCCOXjT--DOti">
     </p>
 </div>
 <div id="rooms">
