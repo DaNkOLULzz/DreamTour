@@ -11,7 +11,11 @@ import javax.naming.NamingException;
 
 public class HotelServiceImpl implements IHotelService {
 
-    private IHotelDao hotelDao = new HotelDaoImpl();
+    private IHotelDao hotelDao;
+
+    public HotelServiceImpl() throws SQLException, NamingException {
+        hotelDao = new HotelDaoImpl();
+    }
 
     @Override
     public List<Hotel> getAll() throws SQLException, NamingException {

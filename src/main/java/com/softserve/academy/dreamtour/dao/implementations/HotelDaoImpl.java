@@ -16,7 +16,7 @@ public class HotelDaoImpl implements IHotelDao {
 
     private Connection connection;
 
-    public HotelDaoImpl() throws SQLException, NamingException{
+    public HotelDaoImpl() throws SQLException, NamingException {
         connection = DBConnection.getConnection();
     }
 
@@ -98,7 +98,7 @@ public class HotelDaoImpl implements IHotelDao {
             hotel.setHotelDescription(set.getString("hotel_description"));
             hotel.setImageUrl(set.getString("image_url"));
             hotel.setStars(set.getInt("stars"));
-            hotel.setIdCity(set.getInt("city_id"));
+            hotel.setIdCity(set.getInt("id_city"));
         }
         statement.close();
 
