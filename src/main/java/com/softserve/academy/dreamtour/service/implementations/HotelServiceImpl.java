@@ -14,12 +14,14 @@ import javax.naming.NamingException;
 
 public class HotelServiceImpl implements IHotelService {
 
+
     private IHotelDao hotelDao = null;
     private ICityDao cityDao = null;
 
     public HotelServiceImpl() throws SQLException, NamingException {
         this.hotelDao = new HotelDaoImpl();
         this.cityDao = new CityDaoImpl();
+
     }
 
     @Override
