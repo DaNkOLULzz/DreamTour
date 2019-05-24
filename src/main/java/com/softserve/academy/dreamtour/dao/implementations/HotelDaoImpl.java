@@ -105,6 +105,8 @@ public class HotelDaoImpl implements IHotelDao {
         return hotel;
     }
 
+
+
     @Override
     public boolean update(Hotel hotel) throws SQLException, NamingException {
         String query = "UPDATE hotel SET hotel_name = ?, hotel_description = ?, image_url = ?, "
@@ -141,7 +143,41 @@ public class HotelDaoImpl implements IHotelDao {
 
 
     @Override
-    public int[] hotelStatistics(String hotelName) throws SQLException {
+
+    public List<Hotel> getAllAvailableHotelsInCity(String startDate, String endDate, int cityId) throws SQLException, NamingException {
+        String query = "select * from hotel \n" +
+                "where id in(select id_hotel from room where id not in\n" +
+                "(select id_room from booking where not\n" +
+                "startDate >? or endDate<?))";
+        if (endDate.equals("")) {
+            endDate = "date_add(\"" + startDate + "\", INTERVAL 7 DAY)";
+
+        }
+        ArrayList<Hotel> hotelList = new ArrayList<>();
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, endDate);
+        statement.setString(2, startDate);
+
+        ResultSet set = statement.executeQuery();
+        while (set.next()) {
+            Hotel hotel = new Hotel();
+            hotel.setIdHotel(set.getInt("id"));
+            hotel.setHotelName(set.getString("hotel_name"));
+            hotel.setHotelDescription(set.getString("hotel_description"));
+            hotel.setImageUrl(set.getString("image_url"));
+            hotel.setStars(set.getInt("stars"));
+            hotel.setIdCity(set.getInt("id_city"));
+            hotelList.add(hotel);
+        }
+        statement.close();
+
+        return hotelList;
+    }
+
+    @Override
+    public int[] hotelStatistics(String hotelName) throws SQLException, NamingException {
+
         int[] statData = new int[2];
         String query = "select count(booking.id), "
             + "avg(datediff(booking.endDate, booking.startDate))"
@@ -153,6 +189,7 @@ public class HotelDaoImpl implements IHotelDao {
             statData[0] = set.getInt(1);
             statData[1] = set.getInt(2);
         }
+        statement.close();
         return statData;
     }
 
