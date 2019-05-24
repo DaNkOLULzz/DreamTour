@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -44,10 +45,17 @@ public class RoomDaoImpl implements IRoomDao {
     }
 
     @Override
-    public List<Room> getFreeRoomsInHotel(int idHotel) throws SQLException {
-        String query = "SELECT * FROM room;";
+    public List<Room> getFreeRoomsInHotel(String startDate, String endDate, int idHotel) throws SQLException, NamingException {
+        String query = "select * from room where id not in(select id_room from booking where not\n" +
+                "startDate >? or endDate<?) and id_hotel=?";
+        if (endDate.equals("")) {
+            endDate = "date_add(\"" + startDate + "\", INTERVAL 7 DAY)";
+        }    
         ArrayList<Room> roomList = new ArrayList<>();
         PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, endDate);
+        statement.setString(2, startDate);
+        statement.setInt(3, idHotel);
         ResultSet set = statement.executeQuery();
         while (set.next()) {
             Room room = new Room();
@@ -67,7 +75,10 @@ public class RoomDaoImpl implements IRoomDao {
     @Override
     public boolean add(Room room) throws SQLException, NamingException {
         String query = "INSERT INTO room (image_url, room_description, price, id_room_type, "
-            + "id_hotel) VALUES(?, ?, ?, ?, ?)";
+
+                + "id_hotel) VALUES(?, ?, ?, ?, ?)";
+        Connection connection = DBConnection.getConnection();
+
         PreparedStatement statement = connection.prepareStatement(query);
         String imageUrl = room.getImageUrl();
         String roomDescription = room.getRoomDescription();
@@ -108,7 +119,10 @@ public class RoomDaoImpl implements IRoomDao {
     @Override
     public boolean update(Room room) throws SQLException, NamingException {
         String query = "UPDATE room SET image_url=?, room_description=?, price=?, "
-            + "id_room_type=?, id_hotel=? WHERE id=?";
+
+                + "id_room_type=?, id_hotel=? WHERE id=?";
+        Connection connection = DBConnection.getConnection();
+
         PreparedStatement statement = connection.prepareStatement(query);
         int idRoom = room.getIdRoom();
         String imageUrl = room.getImageUrl();

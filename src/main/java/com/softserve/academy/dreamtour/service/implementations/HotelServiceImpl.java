@@ -1,7 +1,10 @@
 package com.softserve.academy.dreamtour.service.implementations;
 
+import com.softserve.academy.dreamtour.dao.implementations.CityDaoImpl;
 import com.softserve.academy.dreamtour.dao.implementations.HotelDaoImpl;
+import com.softserve.academy.dreamtour.dao.interfaces.ICityDao;
 import com.softserve.academy.dreamtour.dao.interfaces.IHotelDao;
+import com.softserve.academy.dreamtour.entity.City;
 import com.softserve.academy.dreamtour.entity.Hotel;
 import com.softserve.academy.dreamtour.service.interfaces.IHotelService;
 
@@ -11,10 +14,14 @@ import javax.naming.NamingException;
 
 public class HotelServiceImpl implements IHotelService {
 
-    private IHotelDao hotelDao;
+
+    private IHotelDao hotelDao = null;
+    private ICityDao cityDao = null;
 
     public HotelServiceImpl() throws SQLException, NamingException {
-        hotelDao = new HotelDaoImpl();
+        this.hotelDao = new HotelDaoImpl();
+        this.cityDao = new CityDaoImpl();
+
     }
 
     @Override
@@ -50,5 +57,13 @@ public class HotelServiceImpl implements IHotelService {
     @Override
     public int[] hotelStatistics(String hotelName) throws SQLException, NamingException {
         return hotelDao.hotelStatistics(hotelName);
+    }
+
+    @Override
+    public List<Hotel> getAllAvailableHotelsInCity(String startDate, String endDate, String cityName) throws SQLException, NamingException {
+
+        City city = cityDao.getCityByName(cityName);
+        int cityId = city.getCityId();
+        return hotelDao.getAllAvailableHotelsInCity(startDate,endDate,cityId);
     }
 }

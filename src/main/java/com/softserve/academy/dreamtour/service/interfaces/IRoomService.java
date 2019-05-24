@@ -18,5 +18,5 @@ public interface IRoomService {
 
     boolean delete(int id) throws SQLException, NamingException; // D
 
-    List<Room> getFreeRoomsInHotel(int idHotel) throws SQLException, NamingException;
+    List<Room> getFreeRoomsInHotel(String startDate, String endDate, int idHotel) throws SQLException, NamingException;
 }

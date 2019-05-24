@@ -43,7 +43,7 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
-    public List<Room> getFreeRoomsInHotel(int idHotel) throws SQLException, NamingException {
-        return roomDao.getFreeRoomsInHotel(idHotel);
+    public List<Room> getFreeRoomsInHotel(String startDate, String endDate, int idHotel) throws SQLException, NamingException {
+        return roomDao.getFreeRoomsInHotel(startDate, endDate, idHotel);
     }
 }

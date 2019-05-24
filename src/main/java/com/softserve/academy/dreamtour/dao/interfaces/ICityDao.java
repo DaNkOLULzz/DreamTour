@@ -11,4 +11,6 @@ public interface ICityDao extends  IDao<City>{
     List<String> getCityNameByCountry(String countryName) throws SQLException, NamingException;
 
     List <String> getAllCityNames() throws SQLException, NamingException;
+
+    City getCityByName (String name)throws SQLException, NamingException;
 }
