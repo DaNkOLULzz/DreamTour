@@ -19,16 +19,14 @@ public class HotelPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
         try {
-            //int idHotel = Integer.parseInt(req.getParameter("id"));
+            int idHotel = Integer.parseInt(req.getParameter("id"));
             IHotelService hotelService = new HotelServiceImpl();
-            Hotel hotel = hotelService.get(2);
+            Hotel hotel = hotelService.get(idHotel);
 
             req.setAttribute("hotel", hotel);
             req.getRequestDispatcher("pages/hotelPage.jsp").forward(req,resp);
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
-
     }
-
 }
