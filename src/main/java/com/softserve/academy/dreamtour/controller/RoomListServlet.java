@@ -21,16 +21,14 @@ public class RoomListServlet extends HttpServlet {
         int chosenHotel = Integer.parseInt(req.getParameter("chosenHotel")); //Make sure it will be INTEGER!!!
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
-        RoomServiceImpl roomService = new RoomServiceImpl();
-        List<Room> rooms = null;
         try {
+            RoomServiceImpl roomService = new RoomServiceImpl();
+            List<Room> rooms = null;
             rooms = roomService.getFreeRoomsInHotel(startDate, endDate, chosenHotel);
+            req.setAttribute("hotelList", rooms);
+            req.getRequestDispatcher("pages/roomList.jsp").forward(req, resp);
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
-
-        req.setAttribute("hotelList", rooms);
-        req.getRequestDispatcher("pages/roomList.jsp").forward(req, resp);
-
     }
 }
