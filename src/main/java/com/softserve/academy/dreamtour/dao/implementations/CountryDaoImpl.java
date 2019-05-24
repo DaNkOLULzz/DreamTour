@@ -83,19 +83,6 @@ public class CountryDaoImpl implements ICountryDao {
     }
 
     @Override
-    public List<String> getCountryName() throws SQLException {
-        ArrayList<String> countryList = new ArrayList<>();
-        String query = "SELECT country_name FROM country";
-        Statement statement = con.createStatement();
-        ResultSet set = statement.executeQuery(query);
-        while (set.next()) {
-            String countryName = set.getString("country_name");
-            countryList.add(countryName);
-        }
-        return countryList;
-    }
-
-    @Override
     public boolean update(Country country) throws SQLException {
         boolean updated = false;
         String query = "UPDATE country SET country_name=? WHERE id=?";
