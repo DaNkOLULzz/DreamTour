@@ -8,7 +8,9 @@ import java.util.List;
 import javax.naming.NamingException;
 
 public interface IVisaDao extends IDao<Visa> {
-    int getVisaCountByCountryForPerson(
-        String countryName, int idPerson) throws SQLException, NamingException;
+
+    int getVisaCountByCountryForPerson(String countryName, int idPerson) 
+            throws SQLException, NamingException;
+
     List<Visa> getAllVisaByPerson(int idPerson) throws SQLException, NamingException;
 }

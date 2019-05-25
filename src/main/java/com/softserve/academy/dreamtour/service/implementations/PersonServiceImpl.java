@@ -42,5 +42,11 @@ public class PersonServiceImpl implements IPersonService {
 
         return personDao.delete(id);
     }
+    
+    public Person getPersonByCredentials(String username)
+            throws SQLException, NamingException {
+        
+        return personDao.getPersonByCredentials(username);
+    }
 
 }
