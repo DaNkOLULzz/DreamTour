@@ -11,7 +11,11 @@ import javax.naming.NamingException;
 
 public class RoomServiceImpl implements IRoomService {
 
-    private IRoomDao roomDao = new RoomDaoImpl();
+    private IRoomDao roomDao;
+
+    public RoomServiceImpl() throws SQLException, NamingException {
+        roomDao = new RoomDaoImpl();
+    }
 
     @Override
     public List<Room> getAll() throws SQLException, NamingException {

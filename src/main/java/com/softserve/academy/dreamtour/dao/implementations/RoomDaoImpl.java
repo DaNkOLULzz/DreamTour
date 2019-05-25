@@ -17,11 +17,16 @@ import javax.naming.NamingException;
 
 public class RoomDaoImpl implements IRoomDao {
 
+    private Connection connection;
+
+    public RoomDaoImpl() throws SQLException, NamingException {
+        connection = DBConnection.getConnection();
+    }
+
     @Override
     public List<Room> getAll() throws SQLException, NamingException {
         String query = "SELECT * FROM room;";
         ArrayList<Room> roomList = new ArrayList<>();
-        Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         ResultSet set = statement.executeQuery();
         while (set.next()) {
@@ -45,10 +50,8 @@ public class RoomDaoImpl implements IRoomDao {
                 "startDate >? or endDate<?) and id_hotel=?";
         if (endDate.equals("")) {
             endDate = "date_add(\"" + startDate + "\", INTERVAL 7 DAY)";
-
-        }
+        }    
         ArrayList<Room> roomList = new ArrayList<>();
-        Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, endDate);
         statement.setString(2, startDate);
@@ -72,8 +75,10 @@ public class RoomDaoImpl implements IRoomDao {
     @Override
     public boolean add(Room room) throws SQLException, NamingException {
         String query = "INSERT INTO room (image_url, room_description, price, id_room_type, "
+
                 + "id_hotel) VALUES(?, ?, ?, ?, ?)";
         Connection connection = DBConnection.getConnection();
+
         PreparedStatement statement = connection.prepareStatement(query);
         String imageUrl = room.getImageUrl();
         String roomDescription = room.getRoomDescription();
@@ -94,7 +99,6 @@ public class RoomDaoImpl implements IRoomDao {
     @Override
     public Room get(int id) throws SQLException, NamingException {
         String query = "SELECT * FROM room WHERE id = ?;";
-        Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, id);
         ResultSet set = statement.executeQuery();
@@ -115,8 +119,10 @@ public class RoomDaoImpl implements IRoomDao {
     @Override
     public boolean update(Room room) throws SQLException, NamingException {
         String query = "UPDATE room SET image_url=?, room_description=?, price=?, "
+
                 + "id_room_type=?, id_hotel=? WHERE id=?";
         Connection connection = DBConnection.getConnection();
+
         PreparedStatement statement = connection.prepareStatement(query);
         int idRoom = room.getIdRoom();
         String imageUrl = room.getImageUrl();

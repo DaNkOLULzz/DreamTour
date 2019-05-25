@@ -1,0 +1,24 @@
+#images{
+	float: left;
+	background-color: green;
+	width: 50%;
+	margin-left: 10%;
+	height: 400px;
+}
+#rooms{
+	float: right;
+	background-color: grey;
+	width: 30%;
+	height: 300px;
+	margin-right: 10%;
+}
+#desc{
+	background-color: yellow;
+	width: 80%;
+	height: 100px;
+	margin-left: 10%;
+}
+input{
+	width: 30%;
+	height: 100px;
+}

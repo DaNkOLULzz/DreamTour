@@ -15,11 +15,16 @@ import javax.naming.NamingException;
 
 public class BookingDaoImpl implements IBookingDao {
 
+    private Connection connection;
+
+    public BookingDaoImpl() throws SQLException, NamingException {
+        connection = DBConnection.getConnection();
+    }
+
     @Override
     public List<Booking> getAll() throws SQLException, NamingException {
         String query = "SELECT * FROM booking;";
         ArrayList<Booking> bookingList = new ArrayList<>();
-        Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         ResultSet set = statement.executeQuery();
         while (set.next()) {
@@ -44,7 +49,6 @@ public class BookingDaoImpl implements IBookingDao {
     public boolean add(Booking booking) throws SQLException, NamingException {
         String query = "INSERT INTO booking (startDate, endDate, id_country, id_city, "
             + "id_tourist, id_hotel, id_visa, id_room) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         Date startDate = booking.getStartDate();
         Date endDate = booking.getEndDate();
@@ -71,7 +75,6 @@ public class BookingDaoImpl implements IBookingDao {
     @Override
     public Booking get(int id) throws SQLException, NamingException {
         String query = "SELECT * FROM booking WHERE id = ?;";
-        Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, id);
         ResultSet set = statement.executeQuery();
@@ -96,7 +99,6 @@ public class BookingDaoImpl implements IBookingDao {
     public boolean update(Booking booking) throws SQLException, NamingException {
         String query = "UPDATE booking SET startDate = ?, endDate = ?, id_country = ?, id_city = ?,"
             + "id_tourist = ?, id_hotel = ?, id_visa = ?, id_room = ? WHERE id = ?";
-        Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         int idBooking = booking.getIdBooking();
         Date startDate = booking.getStartDate();
@@ -125,7 +127,6 @@ public class BookingDaoImpl implements IBookingDao {
     @Override
     public boolean delete(int id) throws SQLException, NamingException {
         String query = "DELETE FROM booking WHERE id=?";
-        Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, id);
         boolean isDeleted = statement.execute();

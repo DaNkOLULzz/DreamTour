@@ -32,7 +32,5 @@ public class RoomListServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
-
     }
 }

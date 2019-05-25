@@ -18,14 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 public class GetCountriesServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        
+
         try {
-            
+
             ICountryService countryService = new CountryServiceImpl();
             List<String> countryList = countryService.getAllNames();
-            
+
             req.setAttribute("countries", countryList);
         } catch (SQLException | NamingException e) {
             // TODO Auto-generated catch block
