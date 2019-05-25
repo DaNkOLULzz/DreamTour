@@ -18,4 +18,6 @@ public interface IPersonService {
     boolean update(Person person) throws SQLException, NamingException; // U
 
     boolean delete(int id) throws SQLException, NamingException; // D
+    
+    Person getPersonByCredentials(String username) throws SQLException, NamingException;
 }
