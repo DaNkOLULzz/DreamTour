@@ -30,7 +30,7 @@
 
 	<div class="s002">
 
-		<form method="POST" action="${pageContext.request.contextPath}/HotelList" onsubmit="return validate()">
+		<form method="POST" action="${pageContext.request.contextPath}/HotelListServlet" onsubmit="return validate()">
 			<fieldset>
 				<legend>You dream - we make</legend>
 			</fieldset>
