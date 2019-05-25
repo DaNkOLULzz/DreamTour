@@ -18,6 +18,7 @@
 
 <body>
 
+
 <div class="topnav" id="myTopnav">
     <a href="${pageContext.request.contextPath}/">DreamTour</a>
 
@@ -101,6 +102,7 @@
     $(document).ready(function () {
 
         $("#countrySelection").change(function () {
+
 
             var e = document.getElementById("countrySelection");
             var chosenCountry = e.options[e.selectedIndex].value;
