@@ -1,11 +1,8 @@
 package com.softserve.academy.dreamtour.controller;
 
-import com.softserve.academy.dreamtour.dao.implementations.PersonDaoImpl;
-import com.softserve.academy.dreamtour.dao.interfaces.IPersonDao;
-import com.softserve.academy.dreamtour.entity.Person;
-import com.softserve.academy.dreamtour.enums.PersonType;
-
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -15,6 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.softserve.academy.dreamtour.entity.Person;
+import com.softserve.academy.dreamtour.enums.PersonType;
+import com.softserve.academy.dreamtour.service.implementations.PersonServiceImpl;
+import com.softserve.academy.dreamtour.service.interfaces.IPersonService;
+import com.softserve.academy.dreamtour.utils.HashPasswordUtil;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
@@ -23,30 +25,37 @@ public class RegistrationServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.getRequestDispatcher("pages/registration.jsp").forward(request, response);
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
 
-        Person person = new Person(
-                request.getParameter("username"),
-                request.getParameter("password"),
-                request.getParameter("firstName"),
-                request.getParameter("lastName"), 
-                PersonType.USER
-                );
-        
-        IPersonDao personDao = new PersonDaoImpl();
+        String username = request.getParameter("username");
+        String passwordToHash = request.getParameter("password");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
 
         try {
-            personDao.add(person);
+
+            String securePassword = HashPasswordUtil.hashPassword(passwordToHash);
+            IPersonService personService = new PersonServiceImpl();
+            Person person = personService.getPersonByCredentials(username);
+
+            if (person.getUsername() == null) {
+
+                person = new Person(username, securePassword, firstName, lastName, PersonType.USER);
+                personService.add(person);
+                response.sendRedirect("/");
+            } else {
+                response.sendError(403, "User with this username already exists");
+            }
+
         } catch (SQLException | NamingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
-        response.sendRedirect("/");
+
     }
 
 }

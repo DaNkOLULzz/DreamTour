@@ -21,6 +21,7 @@ public class RoomListServlet extends HttpServlet {
         int chosenHotel = Integer.parseInt(req.getParameter("chosenHotel")); //Make sure it will be INTEGER!!!
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
+
         try {
             RoomServiceImpl roomService = new RoomServiceImpl();
             List<Room> rooms = null;
@@ -30,5 +31,6 @@ public class RoomListServlet extends HttpServlet {
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
+
     }
 }

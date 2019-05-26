@@ -74,7 +74,7 @@ public class CityDaoImpl implements ICityDao {
         ResultSet set = statement.executeQuery();
         while (set.next()) {
             city.setCityId(set.getInt("id"));
-            city.setCityName(set.getString("country_name"));
+            city.setCityName(set.getString("city_name"));
             city.setCountryId(set.getInt("id_country"));
         }
         statement.close();
