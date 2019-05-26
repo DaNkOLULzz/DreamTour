@@ -20,10 +20,16 @@
 
 
 <div class="topnav" id="myTopnav">
-    <a href="#home">DreamTour</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
+    <a href="${pageContext.request.contextPath}/">DreamTour</a>
+
+    <c:if test="${empty sessionScope.user}">
+        <a href="${pageContext.request.contextPath}/login">Log In</a>
+        <a href="${pageContext.request.contextPath}/registration">Sign up</a>
+    </c:if>
+    <c:if test="${empty sessionScope.user == false}">
+        <a href="${pageContext.request.contextPath}/logout">Log out</a>
+    </c:if>
+
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i>
     </a>
@@ -140,14 +146,15 @@
         var startDate = document.getElementById("depart").value;
         var endDate = document.getElementById("return").value;
 
-        console.log(startDate)
-        if (chosenCountry == "allCountries") {
+        console.log(startDate);
+
+        if (chosenCountry === "allCountries") {
             alert("Please, choose country!");
             return false;
         } else {
 
-            if (endDate != "" && startDate == "") {
-                alert("Please, choose start Date!")
+            if (endDate !== "" && startDate === "") {
+                alert("Please, choose start Date!");
                 return false;
             } else {
                 return true;
