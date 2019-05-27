@@ -1,9 +1,10 @@
 package com.softserve.academy.dreamtour.controller;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.sql.SQLException;
+import com.softserve.academy.dreamtour.entity.Person;
+import com.softserve.academy.dreamtour.enums.PersonType;
+import com.softserve.academy.dreamtour.service.implementations.PersonServiceImpl;
+import com.softserve.academy.dreamtour.service.interfaces.IPersonService;
+import com.softserve.academy.dreamtour.utils.HashPasswordUtil;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -11,12 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.softserve.academy.dreamtour.entity.Person;
-import com.softserve.academy.dreamtour.enums.PersonType;
-import com.softserve.academy.dreamtour.service.implementations.PersonServiceImpl;
-import com.softserve.academy.dreamtour.service.interfaces.IPersonService;
-import com.softserve.academy.dreamtour.utils.HashPasswordUtil;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
@@ -47,9 +45,14 @@ public class RegistrationServlet extends HttpServlet {
 
                 person = new Person(username, securePassword, firstName, lastName, PersonType.USER);
                 personService.add(person);
+
+                HttpSession session = request.getSession();
+                session.setAttribute("user", username);
+                System.out.println("successful registrations");
+
                 response.sendRedirect("/");
             } else {
-                response.sendError(403, "User with this username already exists");
+                response.sendError(403);
             }
 
         } catch (SQLException | NamingException e) {
