@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/HotelPageServlet")
 public class HotelPageServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
         try {
-            int idHotel = Integer.parseInt(req.getParameter("id"));
+            int idHotel = Integer.parseInt(req.getParameter("idHotel"));
             IHotelService hotelService = new HotelServiceImpl();
             Hotel hotel = hotelService.get(idHotel);
 

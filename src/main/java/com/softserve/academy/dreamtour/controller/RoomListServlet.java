@@ -18,7 +18,7 @@ public class RoomListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int chosenHotel = Integer.parseInt(req.getParameter("chosenHotel")); //Make sure it will be INTEGER!!!
+        int chosenHotel = Integer.parseInt(req.getParameter("idHotel")); //Make sure it will be INTEGER!!!
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
 
@@ -26,7 +26,7 @@ public class RoomListServlet extends HttpServlet {
             RoomServiceImpl roomService = new RoomServiceImpl();
             List<Room> rooms = null;
             rooms = roomService.getFreeRoomsInHotel(startDate, endDate, chosenHotel);
-            req.setAttribute("hotelList", rooms);
+            req.setAttribute("roomList", rooms);
             req.getRequestDispatcher("pages/roomList.jsp").forward(req, resp);
         } catch (SQLException | NamingException e) {
             e.printStackTrace();

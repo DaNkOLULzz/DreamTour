@@ -55,8 +55,13 @@ public class HotelServiceImpl implements IHotelService {
     }
 
     @Override
-    public int[] hotelStatistics(String hotelName) throws SQLException, NamingException {
-        return hotelDao.hotelStatistics(hotelName);
+    public int countTourist(String hotelName) throws SQLException, NamingException {
+        return hotelDao.countTourist(hotelName);
+    }
+
+    @Override
+    public int averageStay(String hotelName) throws SQLException, NamingException {
+        return hotelDao.averageStay(hotelName);
     }
 
     @Override

@@ -1,50 +1,55 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-	<style>
-		<%@ include file="/css/hotelList.css"%>
-	</style>
-	<link href="css/hotelList.css" rel="stylesheet" />
-<!--<title>Insert title here</title>-->
+    <meta charset="ISO-8859-1">
+    <style>
+        <%@ include file="/css/hotelList.css"%>
+    </style>
+    <link href="css/hotelList.css" rel="stylesheet"/>
+    <title>List of Hotels</title>
 </head>
 <body background="../images/Beijing.jpeg">
 
+<c:forEach items="${hotelList}" var="hotel" varStatus="status">
 
+    <div id="container">
 
-		<c:forEach items="${hotelList}" var="hotel">
+        <div class="product-details">
 
-			<div id="container">
+            <c:url var="hotelId" value="HotelPageServlet">
+                <c:param name="idHotel" value="${hotel.idHotel}"/>
+            </c:url>
+            <h2><a href="${hotelId}">${hotel.hotelName}</a></h2>
 
-				<div class="product-details">
-					<h2><a href="home.jsp">${hotel.hotelName}</a></h2>
-					<p><i class="icon"> &#x2605 &#x2605 &#x2605 &#x2605 &#x2605</i></p>
+            <p>
+                <c:forEach var="i" begin="1" end="${hotel.stars}" step="1">
+                    <i class="icon"> &#x2605</i>
+                </c:forEach>
+            </p>
 
-					<p>Price per day:</p>
-					<div class="statistics">
-						<span>avarage stay: 7 days |  total tourists: 500</span>
-					</div>
+            <p>Price per day:</p>
+            <div class="statistics">
+                <span>average stay: ${countTourist[status.index]} days |  total tourists: ${averageStay[status.index]}</span>
+            </div>
 
-				</div>
+        </div>
 
-				<div class="product-image">
+        <div class="product-image">
 
-					<img src="https://live.staticflickr.com/65535/32932471367_354f843af3_b.jpg">
+            <img src="https://live.staticflickr.com/65535/32932471367_354f843af3_b.jpg">
 
-					<div class="info">
+            <div class="info">
 
-						<p class="information">${hotel.hotelDescription}</p>
-					</div>
-				</div>
+                <p class="information">${hotel.hotelDescription}</p>
+            </div>
+        </div>
 
-			</div>
+    </div>
 
-		</c:forEach>
-
-
+</c:forEach>
 
 
 </body>
