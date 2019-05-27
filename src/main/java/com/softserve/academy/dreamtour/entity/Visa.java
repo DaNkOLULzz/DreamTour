@@ -1,6 +1,7 @@
 package com.softserve.academy.dreamtour.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Visa {
@@ -8,18 +9,18 @@ public class Visa {
     private int idVisa;
     private int idPerson;
     private int idCountry;
-    private Date endDate;
+    private LocalDate endDate;
 
     
     public Visa() { }
     
-    public Visa(int idPerson, int idCountry, Date endDate) {
+    public Visa(int idPerson, int idCountry, LocalDate endDate) {
         this.idPerson = idPerson;
         this.idCountry = idCountry;
         this.endDate = endDate;
     }
 
-    public Visa(int idVisa, int idPerson, int idCountry, Date endDate) {
+    public Visa(int idVisa, int idPerson, int idCountry, LocalDate endDate) {
         this.idVisa = idVisa;
         this.idPerson = idPerson;
         this.idCountry = idCountry;
@@ -51,11 +52,11 @@ public class Visa {
         this.idCountry = idCountry;
     }
     
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

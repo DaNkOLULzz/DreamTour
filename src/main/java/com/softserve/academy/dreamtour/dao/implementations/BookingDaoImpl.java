@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -30,8 +31,8 @@ public class BookingDaoImpl implements IBookingDao {
         while (set.next()) {
             Booking booking = new Booking();
             booking.setIdBooking(set.getInt("id"));
-            booking.setStartDate(set.getDate("startDate"));
-            booking.setEndDate(set.getDate("endDate"));
+            booking.setStartDate(set.getDate("startDate").toLocalDate());
+            booking.setEndDate(set.getDate("endDate").toLocalDate());
             booking.setIdCountry(set.getInt("id_country"));
             booking.setIdCity(set.getInt("id_city"));
             booking.setIdPerson(set.getInt("id_tourist"));
@@ -50,16 +51,16 @@ public class BookingDaoImpl implements IBookingDao {
         String query = "INSERT INTO booking (startDate, endDate, id_country, id_city, "
             + "id_tourist, id_hotel, id_visa, id_room) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
-        Date startDate = booking.getStartDate();
-        Date endDate = booking.getEndDate();
+        LocalDate startDate = booking.getStartDate();
+        LocalDate endDate = booking.getEndDate();
         int idCountry = booking.getIdCountry();
         int idCity = booking.getIdCity();
         int idTourist = booking.getIdPerson();
         int idHotel = booking.getIdHotel();
         int idVisa = booking.getIdVisa();
         int idRoom = booking.getIdRoom();
-        statement.setDate(1, startDate);
-        statement.setDate(2, endDate);
+        statement.setDate(1, Date.valueOf(startDate));
+        statement.setDate(2, Date.valueOf(endDate));
         statement.setInt(3, idCountry);
         statement.setInt(4, idCity);
         statement.setInt(5, idTourist);
@@ -81,8 +82,8 @@ public class BookingDaoImpl implements IBookingDao {
         Booking booking = new Booking();
         while (set.next()) {
             booking.setIdBooking(set.getInt("id"));
-            booking.setStartDate(set.getDate("startDate"));
-            booking.setEndDate(set.getDate("endDate"));
+            booking.setStartDate(set.getDate("startDate").toLocalDate());
+            booking.setEndDate(set.getDate("endDate").toLocalDate());
             booking.setIdCountry(set.getInt("id_country"));
             booking.setIdCity(set.getInt("id_city"));
             booking.setIdPerson(set.getInt("id_tourist"));
@@ -101,16 +102,16 @@ public class BookingDaoImpl implements IBookingDao {
             + "id_tourist = ?, id_hotel = ?, id_visa = ?, id_room = ? WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         int idBooking = booking.getIdBooking();
-        Date startDate = booking.getStartDate();
-        Date endDate = booking.getEndDate();
+        LocalDate startDate = booking.getStartDate();
+        LocalDate endDate = booking.getEndDate();
         int idCountry = booking.getIdCountry();
         int idCity = booking.getIdCity();
         int idTourist = booking.getIdPerson();
         int idHotel = booking.getIdHotel();
         int idVisa = booking.getIdVisa();
         int idRoom = booking.getIdRoom();
-        statement.setDate(1, startDate);
-        statement.setDate(2, endDate);
+        statement.setDate(1, Date.valueOf(startDate));
+        statement.setDate(2, Date.valueOf(endDate));
         statement.setInt(3, idCountry);
         statement.setInt(4, idCity);
         statement.setInt(5, idTourist);

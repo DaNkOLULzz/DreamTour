@@ -4,10 +4,7 @@ import com.softserve.academy.dreamtour.config.DBConnection;
 import com.softserve.academy.dreamtour.dao.interfaces.IVisaDao;
 import com.softserve.academy.dreamtour.entity.Visa;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +25,7 @@ public class VisaDaoImpl implements IVisaDao {
 
             Visa visa = new Visa();
             visa.setIdVisa(rs.getInt("id"));
-            visa.setEndDate(rs.getDate("endDate"));
+            visa.setEndDate(rs.getDate("endDate").toLocalDate());
             visa.setIdPerson(rs.getInt("id_tourist"));
             visa.setIdCountry(rs.getInt("id_country"));
             visaList.add(visa);
@@ -61,7 +58,7 @@ public class VisaDaoImpl implements IVisaDao {
             + "VALUES (?, ?, ?)";
 
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
-        ps.setDate(1, visa.getEndDate());
+        ps.setDate(1, Date.valueOf(visa.getEndDate()));
         ps.setInt(2, visa.getIdPerson());
         ps.setInt(3, visa.getIdCountry());
 
@@ -84,7 +81,7 @@ public class VisaDaoImpl implements IVisaDao {
         while (rs.next()) {
 
             visa.setIdVisa(rs.getInt("id"));
-            visa.setEndDate(rs.getDate("endDate"));
+            visa.setEndDate(rs.getDate("endDate").toLocalDate());
             visa.setIdPerson(rs.getInt("id_tourist"));
             visa.setIdCountry(rs.getInt("id_country"));
         }
@@ -137,7 +134,7 @@ public class VisaDaoImpl implements IVisaDao {
 
             Visa visa = new Visa();
             visa.setIdVisa(rs.getInt("id"));
-            visa.setEndDate(rs.getDate("endDate"));
+            visa.setEndDate(rs.getDate("endDate").toLocalDate());
             visa.setIdPerson(rs.getInt("id_tourist"));
             visa.setIdCountry(rs.getInt("id_country"));
             visaList.add(visa);

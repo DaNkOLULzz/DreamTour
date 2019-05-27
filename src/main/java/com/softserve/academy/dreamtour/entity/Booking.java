@@ -1,13 +1,14 @@
 package com.softserve.academy.dreamtour.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Booking {
 
     private int idBooking;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int idCountry;
     private int idCity;
     private int idPerson;
@@ -18,7 +19,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(int idBooking, Date startDate, Date endDate, int idCountry, int idCity,
+    public Booking(LocalDate startDate, LocalDate endDate, int idCountry, int idCity,
                    int idPerson, int idHotel, int idVisa, int idRoom) {
         this.idBooking = idBooking;
         this.startDate = startDate;
@@ -39,19 +40,19 @@ public class Booking {
         this.idBooking = idBooking;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

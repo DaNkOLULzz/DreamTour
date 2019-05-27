@@ -6,14 +6,27 @@ import com.softserve.academy.dreamtour.entity.Visa;
 import com.softserve.academy.dreamtour.service.interfaces.IVisaService;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import javax.naming.NamingException;
 
 
 public class VisaServiceImpl implements IVisaService {
-    
+
+    @Override
+    public Visa hasVisa(int idPerson, int idCountry, LocalDate endDate) throws SQLException, NamingException {
+        List<Visa> visaList = getAllVisaByPerson(idPerson);
+        for (Visa visa : visaList) {
+            if (visa.getIdCountry() == idCountry && visa.getIdPerson() == idPerson
+                && visa.getEndDate().isAfter(endDate)) {
+                return visa;
+            }
+        }
+        return null;
+    }
+
     private IVisaDao visaDao = new VisaDaoImpl();
-    
+
     @Override
     public List<Visa> getAll() throws SQLException, NamingException {
 
@@ -46,7 +59,7 @@ public class VisaServiceImpl implements IVisaService {
 
     @Override
     public List<Visa> getAllVisaByPerson(int idPerson) throws SQLException, NamingException {
-        
+
         return visaDao.getAllVisaByPerson(idPerson);
     }
 
