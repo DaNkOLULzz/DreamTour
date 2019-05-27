@@ -64,7 +64,7 @@ public class HotelListServlet extends HttpServlet {
         req.setAttribute("hotelList", hotels);
         req.setAttribute("countTourist", countTourist);
         req.setAttribute("averageStay", averageStay);
-        req.getRequestDispatcher("pages/hotelList.jsp").forward(req, resp);
+        req.getRequestDispatcher("pages/hotellist.jsp").forward(req, resp);
     }
 
 }
