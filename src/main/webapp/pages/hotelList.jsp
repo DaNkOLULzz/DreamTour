@@ -11,7 +11,8 @@
     <link href="css/hotelList.css" rel="stylesheet"/>
     <title>List of Hotels</title>
 </head>
-<body background="../images/Beijing.jpeg">
+<body background="../images/bg_1.jpg">
+
 
 <c:forEach items="${hotelList}" var="hotel" varStatus="status">
 
@@ -19,10 +20,9 @@
 
         <div class="product-details">
 
-            <c:url var="hotelId" value="HotelPageServlet">
-                <c:param name="idHotel" value="${hotel.idHotel}"/>
-            </c:url>
-            <h2><a href="${hotelId}">${hotel.hotelName}</a></h2>
+
+            <h2><a href="/hotel?idHotel=${hotel.idHotel}&startDate=${startDate}&endDate=${endDate}">
+                    ${hotel.hotelName}</a></h2>
 
             <p>
                 <c:forEach var="i" begin="1" end="${hotel.stars}" step="1">

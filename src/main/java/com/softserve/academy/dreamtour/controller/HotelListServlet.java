@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-@WebServlet("/HotelListServlet")
+@WebServlet("/hotellist")
 public class HotelListServlet extends HttpServlet {
 
     @Override
@@ -32,10 +32,10 @@ public class HotelListServlet extends HttpServlet {
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
 
-        IHotelService hotelService = null;
+        IHotelService hotelService;
         List<Hotel> hotels = null;
-        int []countTourist=null;
-        int [] averageStay=null;
+        int[] countTourist = null;
+        int[] averageStay = null;
 
         try {
             hotelService = new HotelServiceImpl();
@@ -49,7 +49,7 @@ public class HotelListServlet extends HttpServlet {
             averageStay = new int[hotels.size()];
 
             for (Hotel hotel : hotels) {
-                int i=0;
+                int i = 0;
                 countTourist[i] = hotelService.countTourist(hotel.getHotelName());
                 averageStay[i] = hotelService.averageStay(hotel.getHotelName());
                 i++;
@@ -62,7 +62,7 @@ public class HotelListServlet extends HttpServlet {
         req.setAttribute("startDate", startDate);
         req.setAttribute("endDate", endDate);
         req.setAttribute("hotelList", hotels);
-        req.setAttribute("countTourist",countTourist);
+        req.setAttribute("countTourist", countTourist);
         req.setAttribute("averageStay", averageStay);
         req.getRequestDispatcher("pages/hotelList.jsp").forward(req, resp);
     }

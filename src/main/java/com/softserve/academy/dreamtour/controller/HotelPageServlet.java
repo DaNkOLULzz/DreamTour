@@ -13,11 +13,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/HotelPageServlet")
+@WebServlet("/hotel")
 public class HotelPageServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
+
+
+        System.out.println(req.getParameter("idHotel"));
+        System.out.println(req.getParameter("startDate"));
+        System.out.println(req.getParameter("endDate"));
+
+
         try {
             int idHotel = Integer.parseInt(req.getParameter("idHotel"));
             IHotelService hotelService = new HotelServiceImpl();
