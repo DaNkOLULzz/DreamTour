@@ -10,16 +10,16 @@
 
 <main>
 
-    <input id="tab1" type="radio" name="tabs" checked>
-    <label for="tab1">Profile</label>
+    <input id="tab1" class="inp" type="radio" name="tabs" checked>
+    <label class="lab" for="tab1">Profile</label>
 
-    <input id="tab2" type="radio" name="tabs">
-    <label for="tab2">Visa Statistic</label>
+    <input id="tab2" class="inp" type="radio" name="tabs">
+    <label class="lab" for="tab2">Visa Statistic</label>
 
     <section id="content1">
-        <p>
-            profile info
-        </p>
+        <p>First Name: ${person.firstName}</p>
+        <p>Last Name: ${person.lastName}</p>
+        <p>Username: ${person.username}</p>
     </section>
 
     <section id="content2">
