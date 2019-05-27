@@ -40,9 +40,12 @@
         </div>
         <div class="row border border-dark rounded">
             <h1>Available rooms</h1>
-            <c:forEach items="${roomList}" var="room">
-                <p><a href="#"> ${room.price}$</a></p>
-            </c:forEach>
+
+            <ul class="list-group">
+                <c:forEach items="${roomList}" var="room">
+                    <li class="list-group-item"><a href="#">${room.roomDescription} ${room.price}$ per day</a></li>
+                </c:forEach>
+            </ul>
         </div>
     </div>
 </div>
