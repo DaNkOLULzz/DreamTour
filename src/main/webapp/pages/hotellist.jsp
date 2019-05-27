@@ -10,9 +10,10 @@
     </style>
     <link href="css/hotelList.css" rel="stylesheet"/>
     <title>List of Hotels</title>
+
 </head>
 <body background="../images/bg_1.jpg">
-
+<%--<jsp:include page="../components/header.jsp"/>--%>
 
 <c:forEach items="${hotelList}" var="hotel" varStatus="status">
 

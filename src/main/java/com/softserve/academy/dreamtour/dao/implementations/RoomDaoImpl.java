@@ -47,7 +47,7 @@ public class RoomDaoImpl implements IRoomDao {
     @Override
     public List<Room> getFreeRoomsInHotel(String startDate, String endDate, int idHotel) throws SQLException, NamingException {
         String query = "select * from room where id not in(select id_room from booking where not\n" +
-                "startDate >? or endDate<?) and id_hotel=?";
+                "(startDate >? or endDate<?)) and id_hotel=?";
         if (endDate.equals("")) {
             endDate = "date_add(\"" + startDate + "\", INTERVAL 7 DAY)";
         }    
