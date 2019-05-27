@@ -45,9 +45,11 @@ public class RegistrationServlet extends HttpServlet {
 
                 person = new Person(username, securePassword, firstName, lastName, PersonType.USER);
                 personService.add(person);
+                person = personService.getPersonByCredentials(username);
 
                 HttpSession session = request.getSession();
                 session.setAttribute("user", username);
+                session.setAttribute("userId", person.getIdPerson());
                 System.out.println("successful registrations");
 
                 response.sendRedirect("/");
