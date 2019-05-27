@@ -176,21 +176,33 @@ public class HotelDaoImpl implements IHotelDao {
     }
 
     @Override
-    public int[] hotelStatistics(String hotelName) throws SQLException, NamingException {
+    public int countTourist(String hotelName) throws SQLException, NamingException {
 
-        int[] statData = new int[2];
-        String query = "select count(booking.id), "
-            + "avg(datediff(booking.endDate, booking.startDate))"
+        int statData = 0;
+        String query = "select count(booking.id) "
             + "from booking where booking.id_hotel=(select hotel.id from hotel where hotel_name=?)";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, hotelName);
         ResultSet set = statement.executeQuery();
         while (set.next()) {
-            statData[0] = set.getInt(1);
-            statData[1] = set.getInt(2);
+             statData = set.getInt(1);
         }
         statement.close();
         return statData;
     }
 
+    @Override
+    public int averageStay(String hotelName) throws SQLException, NamingException {
+        String query = "select avg(datediff(booking.endDate, booking.startDate)) "
+                + "from booking where booking.id_hotel=(select hotel.id from hotel where hotel_name=?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, hotelName);
+        ResultSet set = statement.executeQuery();
+        int averageStay=0;
+        while (set.next()) {
+            averageStay = set.getInt(1);
+        }
+        statement.close();
+        return averageStay;
+    }
 }

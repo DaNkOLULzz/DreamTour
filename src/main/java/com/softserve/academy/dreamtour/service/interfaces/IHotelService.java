@@ -19,7 +19,9 @@ public interface IHotelService {
 
     List<Hotel> getAllHotelsByCityName(String cityName) throws SQLException, NamingException;
 
-    int[] hotelStatistics(String hotelName) throws SQLException, NamingException;
+    int countTourist(String hotelName) throws SQLException, NamingException;
+
+    int averageStay(String hotelName) throws SQLException, NamingException;
 
     List<Hotel> getAllAvailableHotelsInCity (String startDate, String endDate, String cityName)throws SQLException, NamingException;
 }
