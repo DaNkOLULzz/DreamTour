@@ -12,7 +12,7 @@
 
 <body>
 
-<form method="post" action="/" onsubmit="return validateCredentials()">
+<form method="post" action="${pageContext.request.contextPath}/home" onsubmit="return validateCredentials()">
     <div class="container">
         <h1 class="title">Sign in</h1>
         <hr>
