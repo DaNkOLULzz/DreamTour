@@ -3,35 +3,17 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="author" content="colorlib.com">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500"
-          rel="stylesheet"/>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>DreamTour</title>
     <link href="css/index.css" rel="stylesheet"/>
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 
 <body>
 
-
-<div class="topnav" id="myTopnav">
-    <a href="#home">DreamTour</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-        <i class="fa fa-bars"></i>
-    </a>
-</div>
+<jsp:include page="components/header.jsp" />
 
 <div class="s002">
 
-    <form method="POST" action="${pageContext.request.contextPath}/HotelListServlet" onsubmit="return validate()">
+    <form method="POST" action="${pageContext.request.contextPath}/hotellist" onsubmit="return validate()">
         <fieldset>
             <legend>You dream - we make</legend>
         </fieldset>
@@ -140,28 +122,19 @@
         var startDate = document.getElementById("depart").value;
         var endDate = document.getElementById("return").value;
 
-        console.log(startDate)
-        if (chosenCountry == "allCountries") {
+        console.log(startDate);
+
+        if (chosenCountry === "allCountries") {
             alert("Please, choose country!");
             return false;
         } else {
 
-            if (endDate != "" && startDate == "") {
-                alert("Please, choose start Date!")
+            if (endDate !== "" && startDate === "") {
+                alert("Please, choose start Date!");
                 return false;
             } else {
                 return true;
             }
-        }
-    }
-</script>
-<script>
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
         }
     }
 </script>

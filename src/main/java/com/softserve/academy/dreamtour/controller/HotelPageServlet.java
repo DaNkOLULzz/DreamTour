@@ -21,6 +21,13 @@ public class HotelPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
+
+
+        System.out.println(req.getParameter("idHotel"));
+        System.out.println(req.getParameter("startDate"));
+        System.out.println(req.getParameter("endDate"));
+
+
         try {
             int idHotel = Integer.parseInt(req.getParameter("id"));
             String startDate = req.getParameter("startDate");

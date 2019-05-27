@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    min-height: 100vh;
+    display: -ms-flexbox;
+    display: flex;
+    background: url("../images/bg_1.jpg");
+    background-size: cover;
+    background-position: center center;
+}
+
+p:not(:last-child) {
+    margin: 0 0 20px;
+}
+
+main {
+    width: 80vw;
+    height: 60vh;
+    margin: 20vh 10vw 0 10vw;
+    border: 1px solid rgba(0, 0, 0, .2);
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+}
+
+section {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid #abc;
+}
+
+input {
+    display: none;
+}
+
+label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #abc;
+    border: 1px solid transparent;
+}
+
+label:before {
+    font-family: fontawesome;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+label[for*='1']:before {
+    content: '\f007';
+}
+
+label[for*='2']:before {
+    content: '\f022';
+}
+
+label:hover {
+    color: #789;
+    cursor: pointer;
+}
+
+input:checked + label {
+    color: #0af;
+    border: 1px solid #abc;
+    border-top: 2px solid #0af;
+    border-bottom: 1px solid #fff;
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+    display: block;
+}
+
+@media screen and (max-width: 800px) {
+    label {
+        font-size: 0;
+    }
+
+    label:before {
+        margin: 0;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    label {
+        padding: 15px;
+    }
+}
