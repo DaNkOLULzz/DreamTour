@@ -26,20 +26,23 @@
     <link rel="stylesheet" type="text/css" href="css/hotelPage.css">
 </head>
 <body>
-
 <div class="view">
-
     <div class="container">
         <div class="row">
-            <div class="col-md-8 border border-dark rounded">
-                <img src="${hotel.imageUrl}">
+            <div class="col-md-7 border border-dark rounded">
+                <h1>${hotel.hotelName}</h1>
+                <img width="100%" height="350px" src="${hotel.imageUrl}">
             </div>
-            <div class="col-md-4 border border-dark rounded">
-                ${hotel.hotelDescription}
+            <div class="col-md-5 border border-dark rounded">
+                <h1>Description</h1>
+                <p align="justify">${hotel.hotelDescription}</p>
             </div>
         </div>
         <div class="row border border-dark rounded">
-            Room list
+            <h1>Available rooms</h1>
+            <c:forEach items="${roomList}" var="room">
+                <p><a href="#"> ${room.price}$</a></p>
+            </c:forEach>
         </div>
     </div>
 </div>
