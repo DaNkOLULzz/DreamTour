@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Profile</title>
@@ -17,17 +18,18 @@
     <label class="lab" for="tab2">Visa Statistic</label>
 
     <section id="content1">
-        <p>First Name: ${person.firstName}</p>
-        <p>Last Name: ${person.lastName}</p>
-        <p>Username: ${person.username}</p>
+        <p>First Name: <span>${person.firstName}</span></p>
+        <hr>
+        <p>Last Name: <span>${person.lastName}</span></p>
+        <hr>
+        <p>Username: <span>${person.username}</span></p>
+        <hr>
     </section>
 
     <section id="content2">
-        <p>amount of visas: 15</p>
-        <p>
-            country 1 - 3 visas
-            country 2 - 2 visas
-        </p>
+        <c:forEach var="visa" items="${visaList}" varStatus="status">
+            <p>${status.index+1}. country - ${countryList[status.index].countryName} <span>end date - ${visa.endDate}</span></p>
+        </c:forEach>
     </section>
 
 </main>

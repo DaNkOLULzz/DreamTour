@@ -148,7 +148,7 @@ public class HotelDaoImpl implements IHotelDao {
         String query = "select * from hotel \n" +
                 "where id in(select id_hotel from room where id not in\n" +
                 "(select id_room from booking where not\n" +
-                "startDate >? or endDate<?))";
+                "(startDate >? or endDate<?)))";
         if (endDate.equals("")) {
             endDate = "date_add(\"" + startDate + "\", INTERVAL 7 DAY)";
 

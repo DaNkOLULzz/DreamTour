@@ -4,11 +4,10 @@ import com.softserve.academy.dreamtour.config.DBConnection;
 import com.softserve.academy.dreamtour.dao.interfaces.IVisaDao;
 import com.softserve.academy.dreamtour.entity.Visa;
 
+import javax.naming.NamingException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.naming.NamingException;
 
 public class VisaDaoImpl implements IVisaDao {
 
@@ -37,10 +36,10 @@ public class VisaDaoImpl implements IVisaDao {
 
     @Override
     public int getVisaCountByCountryForPerson(
-        String countryName, int idPerson) throws SQLException, NamingException {
+            String countryName, int idPerson) throws SQLException, NamingException {
 
         String sql = "SELECT COUNT(id) AS count FROM visa WHERE id_country = "
-            + "(SELECT id FROM country WHERE country_name = ?) AND id_tourist = ?;";
+                + "(SELECT id FROM country WHERE country_name = ?) AND id_tourist = ?;";
 
         PreparedStatement statement = DBConnection.getConnection().prepareStatement(sql);
         statement.setString(1, countryName);
@@ -55,7 +54,7 @@ public class VisaDaoImpl implements IVisaDao {
     public boolean add(Visa visa) throws SQLException, NamingException {
 
         String sql = "INSERT INTO Visa (endDate, id_tourist, id_country) "
-            + "VALUES (?, ?, ?)";
+                + "VALUES (?, ?, ?)";
 
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
         ps.setDate(1, Date.valueOf(visa.getEndDate()));
@@ -122,13 +121,13 @@ public class VisaDaoImpl implements IVisaDao {
 
         ArrayList<Visa> visaList = new ArrayList<>();
 
-        String sql = "SELECT DISTINCT endDate, id_tourist, id_country from visa, person " 
-                + "where visa.id_tourist = ?";
+        String sql = "SELECT  visa.id, endDate, country.id FROM visa LEFT JOIN country  "
+                + "ON visa.id_country = country.id WHERE visa.id_tourist=? ;";
 
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
         ps.setInt(1, idPerson);
 
-        ResultSet rs = ps.executeQuery(sql);
+        ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
 

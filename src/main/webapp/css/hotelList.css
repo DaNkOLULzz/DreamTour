@@ -13,7 +13,12 @@ body {
     text-align: center;
     border-radius: 5px;
     overflow: hidden;
+<<<<<<< HEAD
     margin: 5em auto;-
+=======
+    margin: 5em auto;
+    margin-top: 75px;
+>>>>>>> d1b7532a28e39cc63f6272e3fc4f364846557cc8
     height: 250px;
     width: 800px;
 }
@@ -98,8 +103,6 @@ a:hover {
     height: 250px;
     float: left;
     width: 400px;
-    display: inline-block;
-
 }
 
 #container img {
