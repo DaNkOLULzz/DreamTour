@@ -1,12 +1,5 @@
-.row{
+.row {
     background: rgba(255, 255, 255, 0.5);
-}
-.view{
-    background-image: url('../images/bg_1.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
 }
 .row img{
     margin-bottom: 15px;

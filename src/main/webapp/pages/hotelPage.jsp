@@ -25,7 +25,7 @@
     <title>${hotel.hotelName}</title>
     <link rel="stylesheet" type="text/css" href="css/hotelPage.css">
 </head>
-<body>
+<body background="../images/bg_1.jpg">
 <div class="view">
     <div class="container">
         <div class="row">
