@@ -1,8 +1,11 @@
 package com.softserve.academy.dreamtour.controller;
 
 import com.softserve.academy.dreamtour.entity.Hotel;
+import com.softserve.academy.dreamtour.entity.Room;
 import com.softserve.academy.dreamtour.service.implementations.HotelServiceImpl;
+import com.softserve.academy.dreamtour.service.implementations.RoomServiceImpl;
 import com.softserve.academy.dreamtour.service.interfaces.IHotelService;
+import com.softserve.academy.dreamtour.service.interfaces.IRoomService;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -27,18 +30,17 @@ public class HotelListServlet extends HttpServlet {
         System.out.println(req.getParameter("startDate"));
         System.out.println(req.getParameter("endDate"));
 
-
         String chosenCity = req.getParameter("chosenCity");
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
 
-        IHotelService hotelService;
-        List<Hotel> hotels = null;
-        int[] countTourist = null;
-        int[] averageStay = null;
-
         try {
-            hotelService = new HotelServiceImpl();
+            IHotelService hotelService = new HotelServiceImpl();
+            IRoomService roomService = new RoomServiceImpl();
+            List<Hotel> hotels = null;
+            int[] countTourist = null;
+            int[] averageStay = null;
+
             if (startDate.equals("") && endDate.equals("")) {
                 hotels = hotelService.getAllHotelsByCityName(chosenCity);
 
@@ -52,19 +54,28 @@ public class HotelListServlet extends HttpServlet {
                 int i = 0;
                 countTourist[i] = hotelService.countTourist(hotel.getHotelName());
                 averageStay[i] = hotelService.averageStay(hotel.getHotelName());
-                i++;
+                ++i;
             }
+            List<Room> roomList = roomService.getAll();
+            int price = 0;
+            for (Room room : roomList) {
+                if (room.getPrice() == 500) {
+                    price = room.getPrice();
+                }
+            }
+            req.setAttribute("price", " "+price+"$");
+            req.setAttribute("startDate", startDate);
+            req.setAttribute("endDate", endDate);
+            req.setAttribute("hotelList", hotels);
+            req.setAttribute("countTourist", countTourist);
+            req.setAttribute("averageStay", averageStay);
+            req.getRequestDispatcher("pages/hotellist.jsp").forward(req, resp);
 
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
 
-        req.setAttribute("startDate", startDate);
-        req.setAttribute("endDate", endDate);
-        req.setAttribute("hotelList", hotels);
-        req.setAttribute("countTourist", countTourist);
-        req.setAttribute("averageStay", averageStay);
-        req.getRequestDispatcher("pages/hotellist.jsp").forward(req, resp);
+
     }
 
 }

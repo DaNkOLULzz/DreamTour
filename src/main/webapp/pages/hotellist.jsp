@@ -32,7 +32,7 @@
                 </c:forEach>
             </p>
 
-            <p>Price per day:</p>
+            <p>Price per day:${price}</p>
             <div class="statistics">
                 <span>average stay: ${countTourist[status.index]} days |  total tourists: ${averageStay[status.index]}</span>
             </div>
