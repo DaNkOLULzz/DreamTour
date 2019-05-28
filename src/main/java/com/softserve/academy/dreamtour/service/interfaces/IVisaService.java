@@ -1,6 +1,7 @@
 package com.softserve.academy.dreamtour.service.interfaces;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -18,6 +19,8 @@ public interface IVisaService {
     boolean update(Visa visa) throws SQLException, NamingException; // U
 
     boolean delete(int id) throws SQLException, NamingException; // D
+
+    Visa hasVisa(int idPerson, int idCountry, LocalDate endDate) throws SQLException, NamingException;
 
     List<Visa> getAllVisaByPerson(int idPerson) throws SQLException, NamingException;
 }

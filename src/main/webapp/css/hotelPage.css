@@ -1,24 +1,9 @@
-#images{
-	float: left;
-	background-color: green;
-	width: 50%;
-	margin-left: 10%;
-	height: 400px;
+.row {
+    background: rgba(255, 255, 255, 0.5);
 }
-#rooms{
-	float: right;
-	background-color: grey;
-	width: 30%;
-	height: 300px;
-	margin-right: 10%;
+.row img{
+    margin-bottom: 15px;
 }
-#desc{
-	background-color: yellow;
-	width: 80%;
-	height: 100px;
-	margin-left: 10%;
-}
-input{
-	width: 30%;
-	height: 100px;
+.list-group {
+    margin-left: 20px;
 }

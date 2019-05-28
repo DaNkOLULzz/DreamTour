@@ -68,7 +68,7 @@ public class CountryDaoImpl implements ICountryDao {
 
     @Override
     public Country get(int id) throws SQLException {
-        String query = "SELECT country_name FROM country WHERE country.id = ?";
+        String query = "SELECT id, country_name FROM country WHERE country.id = ?";
         Country country = new Country();
         PreparedStatement statement = con.prepareStatement(query);
         statement.setInt(1, id);

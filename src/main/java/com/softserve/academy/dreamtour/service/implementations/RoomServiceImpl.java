@@ -44,6 +44,10 @@ public class RoomServiceImpl implements IRoomService {
 
     @Override
     public List<Room> getFreeRoomsInHotel(String startDate, String endDate, int idHotel) throws SQLException, NamingException {
-        return roomDao.getFreeRoomsInHotel(startDate, endDate, idHotel);
+        List<Room> roomList = roomDao.getFreeRoomsInHotel(startDate, endDate, idHotel);
+        if (roomList.isEmpty()) {
+            roomList=getAll();
+        }
+        return roomList;
     }
 }
