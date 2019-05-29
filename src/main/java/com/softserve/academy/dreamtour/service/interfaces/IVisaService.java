@@ -20,7 +20,11 @@ public interface IVisaService {
 
     boolean delete(int id) throws SQLException, NamingException; // D
 
-    Visa hasVisa(int idPerson, int idCountry, LocalDate endDate) throws SQLException, NamingException;
+    Visa hasVisa(int idPerson, int idCountry, LocalDate endDate)
+        throws SQLException, NamingException;
+
+    int getIdVisaByCountryByDate(int personId, int countryId, LocalDate endDate)
+        throws SQLException, NamingException;
 
     List<Visa> getAllVisaByPerson(int idPerson) throws SQLException, NamingException;
 }

@@ -7,3 +7,9 @@
 .list-group {
     margin-left: 20px;
 }
+.btn{
+    float: right;
+}
+.info{
+    float:left;
+}

@@ -22,7 +22,9 @@ public class VisaServiceImpl implements IVisaService {
                 return visa;
             }
         }
-        return null;
+        Visa visa = new Visa(idPerson, idCountry, endDate);
+        add(visa);
+        return visa;
     }
 
     private IVisaDao visaDao = new VisaDaoImpl();
@@ -31,6 +33,13 @@ public class VisaServiceImpl implements IVisaService {
     public List<Visa> getAll() throws SQLException, NamingException {
 
         return visaDao.getAll();
+    }
+
+    @Override
+    public int getIdVisaByCountryByDate(int personId, int countryId, LocalDate endDate)
+        throws SQLException, NamingException {
+
+        return visaDao.getIdVisaByCountryByDate(personId, countryId, endDate);
     }
 
     @Override

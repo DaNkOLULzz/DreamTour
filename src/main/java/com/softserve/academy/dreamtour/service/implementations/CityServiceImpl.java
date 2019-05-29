@@ -46,4 +46,9 @@ public class CityServiceImpl implements ICityService {
     public List<String> getCityNameByCountry(String countryName) throws SQLException, NamingException {
         return dao.getCityNameByCountry(countryName);
     }
+
+    @Override
+    public City getCityByName(String cityName) throws SQLException, NamingException {
+        return dao.getCityByName(cityName);
+    }
 }

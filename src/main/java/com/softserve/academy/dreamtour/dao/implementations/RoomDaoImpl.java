@@ -46,8 +46,8 @@ public class RoomDaoImpl implements IRoomDao {
 
     @Override
     public List<Room> getFreeRoomsInHotel(String startDate, String endDate, int idHotel) throws SQLException, NamingException {
-        String query = "select * from room where id not in(select id_room from booking where not\n" +
-                "(startDate >? or endDate<?)) and id_hotel=?";
+        String query = "select * from room where id not in(select id_room from booking where not\n"
+            + "(startDate >? or endDate<?)) and id_hotel=?";
         if (endDate.equals("")) {
             endDate = "date_add(\"" + startDate + "\", INTERVAL 7 DAY)";
         }    
@@ -74,7 +74,7 @@ public class RoomDaoImpl implements IRoomDao {
 
     @Override
     public boolean add(Room room) throws SQLException, NamingException {
-        String query = "INSERT INTO room (image_url, room_description, price, id_room_type, "
+        String query = "INSERT INTO room (image_url, room_description, price, room_type, "
 
                 + "id_hotel) VALUES(?, ?, ?, ?, ?)";
         Connection connection = DBConnection.getConnection();
@@ -120,7 +120,7 @@ public class RoomDaoImpl implements IRoomDao {
     public boolean update(Room room) throws SQLException, NamingException {
         String query = "UPDATE room SET image_url=?, room_description=?, price=?, "
 
-                + "id_room_type=?, id_hotel=? WHERE id=?";
+                + "room_type=?, id_hotel=? WHERE id=?";
         Connection connection = DBConnection.getConnection();
 
         PreparedStatement statement = connection.prepareStatement(query);

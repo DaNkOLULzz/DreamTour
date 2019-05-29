@@ -27,7 +27,7 @@ public class HotelListServlet extends HttpServlet {
         System.out.println(req.getParameter("startDate"));
         System.out.println(req.getParameter("endDate"));
 
-
+        String chosenCountry = req.getParameter("chosenCountry");
         String chosenCity = req.getParameter("chosenCity");
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
@@ -64,6 +64,8 @@ public class HotelListServlet extends HttpServlet {
         req.setAttribute("hotelList", hotels);
         req.setAttribute("countTourist", countTourist);
         req.setAttribute("averageStay", averageStay);
+        req.setAttribute("chosenCountry", chosenCountry);
+        req.setAttribute("chosenCity", chosenCity);
         req.getRequestDispatcher("pages/hotellist.jsp").forward(req, resp);
     }
 

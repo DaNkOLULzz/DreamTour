@@ -20,4 +20,6 @@ public interface ICityService {
     boolean delete(int id) throws SQLException, NamingException; // D
 
     List<String> getCityNameByCountry(String countryName) throws SQLException, NamingException;
+
+    City getCityByName(String cityName) throws SQLException, NamingException;
 }

@@ -1,9 +1,13 @@
 package com.softserve.academy.dreamtour.controller;
 
+import com.softserve.academy.dreamtour.entity.City;
 import com.softserve.academy.dreamtour.entity.Hotel;
 import com.softserve.academy.dreamtour.entity.Room;
+import com.softserve.academy.dreamtour.enums.RoomType;
+import com.softserve.academy.dreamtour.service.implementations.CityServiceImpl;
 import com.softserve.academy.dreamtour.service.implementations.HotelServiceImpl;
 import com.softserve.academy.dreamtour.service.implementations.RoomServiceImpl;
+import com.softserve.academy.dreamtour.service.interfaces.ICityService;
 import com.softserve.academy.dreamtour.service.interfaces.IHotelService;
 
 import java.io.IOException;
@@ -34,11 +38,42 @@ public class HotelPageServlet extends HttpServlet {
             String startDate = req.getParameter("startDate");
             String endDate = req.getParameter("endDate");
 
+            req.setAttribute("startDate", startDate);
+            req.setAttribute("endDate", endDate);
+
+            String cityName = req.getParameter("city");
+
+            ICityService cityService = new CityServiceImpl();
+            City city = cityService.getCityByName(cityName);
+
+            System.out.println(city.getCityId());
+            System.out.println(city.getCountryId());
+
+            req.setAttribute("countryId", city.getCountryId());
+            req.setAttribute("cityId", city.getCityId());
+
             RoomServiceImpl roomService = new RoomServiceImpl();
             List<Room> rooms = roomService.getFreeRoomsInHotel(startDate, endDate, idHotel);
 
-            req.setAttribute("roomList", rooms);
-
+            int countOfStandardRooms = 0;
+            int countOfLuxeRooms = 0;
+            for (Room room : rooms) {
+                if (room.getRoomType() == RoomType.STANDARD) {
+                    countOfStandardRooms++;
+                    req.setAttribute("roomStandard", room);
+                } else {
+                    countOfLuxeRooms++;
+                    req.setAttribute("roomLuxe", room);
+                }
+            }
+            if (countOfStandardRooms == 0) {
+                req.setAttribute("roomStandard", null);
+            }
+            if (countOfLuxeRooms == 0) {
+                req.setAttribute("roomLuxe", null);
+            }
+            req.setAttribute("standardCount", countOfStandardRooms);
+            req.setAttribute("luxeCount", countOfLuxeRooms);
             IHotelService hotelService = new HotelServiceImpl();
             Hotel hotel = hotelService.get(idHotel);
             req.setAttribute("hotel", hotel);
