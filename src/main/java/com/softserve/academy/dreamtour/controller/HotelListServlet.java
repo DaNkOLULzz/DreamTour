@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import static com.softserve.academy.dreamtour.enums.RoomType.STANDARD;
+
 
 @WebServlet("/hotellist")
 public class HotelListServlet extends HttpServlet {
@@ -59,7 +61,7 @@ public class HotelListServlet extends HttpServlet {
             List<Room> roomList = roomService.getAll();
             int price = 0;
             for (Room room : roomList) {
-                if (room.getPrice() == 500) {
+                if (room.getRoomType() == STANDARD) {
                     price = room.getPrice();
                 }
             }
