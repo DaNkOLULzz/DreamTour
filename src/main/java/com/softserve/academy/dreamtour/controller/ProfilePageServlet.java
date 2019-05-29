@@ -1,11 +1,14 @@
 package com.softserve.academy.dreamtour.controller;
 
+import com.softserve.academy.dreamtour.entity.Booking;
 import com.softserve.academy.dreamtour.entity.Country;
 import com.softserve.academy.dreamtour.entity.Person;
 import com.softserve.academy.dreamtour.entity.Visa;
+import com.softserve.academy.dreamtour.service.implementations.BookingServiceImpl;
 import com.softserve.academy.dreamtour.service.implementations.CountryServiceImpl;
 import com.softserve.academy.dreamtour.service.implementations.PersonServiceImpl;
 import com.softserve.academy.dreamtour.service.implementations.VisaServiceImpl;
+import com.softserve.academy.dreamtour.service.interfaces.IBookingService;
 import com.softserve.academy.dreamtour.service.interfaces.ICountryService;
 import com.softserve.academy.dreamtour.service.interfaces.IPersonService;
 import com.softserve.academy.dreamtour.service.interfaces.IVisaService;
@@ -33,12 +36,14 @@ public class ProfilePageServlet extends HttpServlet {
         IPersonService personService = new PersonServiceImpl();
 
         try {
+            IBookingService bookingService = new BookingServiceImpl();
             ICountryService countryService = new CountryServiceImpl();
             Integer userId = (Integer) session.getAttribute("userId");
             Person person = personService.get(userId);
 
             List<Visa> visaList = visaService.getAllVisaByPerson(userId);
             List<Country> countryList = new ArrayList<>();
+            List<Booking> bookingList = bookingService.getAllByPerson(userId);
 
             for(Visa visa: visaList){
 
@@ -49,6 +54,7 @@ public class ProfilePageServlet extends HttpServlet {
             req.setAttribute("person", person);
             req.setAttribute("countryList", countryList);
             req.setAttribute("visaList", visaList);
+            req.setAttribute("bookingList", bookingList);
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
