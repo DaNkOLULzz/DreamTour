@@ -145,10 +145,10 @@ public class HotelDaoImpl implements IHotelDao {
     @Override
 
     public List<Hotel> getAllAvailableHotelsInCity(String startDate, String endDate, int cityId) throws SQLException, NamingException {
-        String query = "select * from hotel \n" +
-                "where id in(select id_hotel from room where id not in\n" +
+        String query = "select distinct hotel.id, hotel.hotel_name, hotel.hotel_description, hotel.image_url, hotel.stars, hotel.id_city from hotel join city\n" +
+                "on hotel.id in(select id_hotel from room where id not in\n" +
                 "(select id_room from booking where not\n" +
-                "(startDate >? or endDate<?)))";
+                "(startDate >? or endDate<?))) and hotel.id_city = ?";
         if (endDate.equals("")) {
             endDate = "date_add(\"" + startDate + "\", INTERVAL 7 DAY)";
 
@@ -158,6 +158,7 @@ public class HotelDaoImpl implements IHotelDao {
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, endDate);
         statement.setString(2, startDate);
+        statement.setInt(3, cityId);
 
         ResultSet set = statement.executeQuery();
         while (set.next()) {

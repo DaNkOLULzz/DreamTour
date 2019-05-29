@@ -5,15 +5,12 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <style>
-        <%@ include file="/css/hotelList.css"%>
-    </style>
-    <%--<link href="css/hotelList.css" rel="stylesheet"/>--%>
+    <link href="../css/hotelList.css" rel="stylesheet"/>
     <title>List of Hotels</title>
 
 </head>
-<body background="../images/bg_1.jpg">
-<%--<jsp:include page="../components/header.jsp"/>--%>
+<body <%--background="../images/bg_1.jpg"--%>>
+<jsp:include page="../components/header.jsp"/>
 
 
 <c:forEach items="${hotelList}" var="hotel" varStatus="status">
