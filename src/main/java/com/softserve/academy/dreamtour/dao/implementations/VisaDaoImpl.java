@@ -122,8 +122,7 @@ public class VisaDaoImpl implements IVisaDao {
 
         ArrayList<Visa> visaList = new ArrayList<>();
 
-        String sql = "SELECT  visa.id, endDate, country.id as id_country FROM visa LEFT JOIN country  "
-            + "ON visa.id_country = country.id WHERE visa.id_tourist=? ;";
+        String sql = "SELECT id, endDate, id_country FROM visa WHERE id_tourist=? ;";
 
         PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
         ps.setInt(1, idPerson);
