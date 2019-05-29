@@ -9,7 +9,7 @@
 
 <body>
 
-<jsp:include page="components/header.jsp" />
+<jsp:include page="components/header.jsp"/>
 
 <div class="s002">
 
@@ -122,10 +122,18 @@
         var startDate = document.getElementById("depart").value;
         var endDate = document.getElementById("return").value;
 
-        console.log(startDate);
+        var sD = new Date(startDate);
+        var eD = new Date(endDate);
+        var today = new Date();
 
         if (chosenCountry === "allCountries") {
             alert("Please, choose country!");
+            return false;
+        } else if (sD.getTime() >= eD.getTime()) {
+            alert("End date should be later than start date!");
+            return false;
+        } else if (sD.getTime() <= today.getTime()){
+            alert("Please, choose future dates!");
             return false;
         } else {
 
