@@ -49,7 +49,7 @@ public class BookingDaoImpl implements IBookingDao {
     @Override
     public boolean add(Booking booking) throws SQLException, NamingException {
         String query = "INSERT INTO booking (startDate, endDate, id_country, id_city, "
-            + "id_tourist, id_hotel, id_visa, id_room) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+                + "id_tourist, id_hotel, id_visa, id_room) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
         LocalDate startDate = booking.getStartDate();
         LocalDate endDate = booking.getEndDate();
@@ -99,7 +99,7 @@ public class BookingDaoImpl implements IBookingDao {
     @Override
     public boolean update(Booking booking) throws SQLException, NamingException {
         String query = "UPDATE booking SET startDate = ?, endDate = ?, id_country = ?, id_city = ?,"
-            + "id_tourist = ?, id_hotel = ?, id_visa = ?, id_room = ? WHERE id = ?";
+                + "id_tourist = ?, id_hotel = ?, id_visa = ?, id_room = ? WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         int idBooking = booking.getIdBooking();
         LocalDate startDate = booking.getStartDate();
@@ -134,5 +134,36 @@ public class BookingDaoImpl implements IBookingDao {
         statement.close();
 
         return isDeleted;
+    }
+
+    @Override
+    public List<Booking> getAllByPerson(int idPerson) throws SQLException, NamingException {
+
+        ArrayList<Booking> bookingList = new ArrayList<>();
+
+        String sql = "SELECT * FROM booking WHERE id_tourist=?;";
+
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+        ps.setInt(1, idPerson);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+
+            Booking booking = new Booking();
+            booking.setIdBooking(rs.getInt("id"));
+            booking.setStartDate(rs.getDate("startDate").toLocalDate());
+            booking.setEndDate(rs.getDate("endDate").toLocalDate());
+            booking.setIdCountry(rs.getInt("id_country"));
+            booking.setIdCity(rs.getInt("id_city"));
+            booking.setIdPerson(rs.getInt("id_tourist"));
+            booking.setIdHotel(rs.getInt("id_hotel"));
+            booking.setIdVisa(rs.getInt("id_visa"));
+            booking.setIdRoom(rs.getInt("id_room"));
+            bookingList.add(booking);
+        }
+        ps.close();
+
+        return bookingList;
     }
 }

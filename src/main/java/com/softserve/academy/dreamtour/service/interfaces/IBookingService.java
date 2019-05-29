@@ -17,4 +17,6 @@ public interface IBookingService {
     boolean update(Booking booking) throws SQLException, NamingException; // U
 
     boolean delete(int id) throws SQLException, NamingException; // D
+
+    List<Booking> getAllByPerson(int idPerson) throws SQLException, NamingException;
 }

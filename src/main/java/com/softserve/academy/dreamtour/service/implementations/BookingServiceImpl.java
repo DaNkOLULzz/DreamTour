@@ -41,4 +41,9 @@ public class BookingServiceImpl implements IBookingService {
     public boolean delete(int id) throws SQLException, NamingException {
         return bookingDao.delete(id);
     }
+
+    @Override
+    public List<Booking> getAllByPerson(int idPerson) throws SQLException, NamingException {
+        return bookingDao.getAllByPerson(idPerson);
+    }
 }
