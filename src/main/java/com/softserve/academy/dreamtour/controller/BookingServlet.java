@@ -28,13 +28,9 @@ public class BookingServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
         try {
-            HttpSession session = req.getSession();
-            int personId = 0;
-            try {
-                personId = (Integer) session.getAttribute("userId");
-            } catch (NullPointerException e) {
-                req.getRequestDispatcher("pages/login.jsp").forward(req, resp);
-            }
+            HttpSession session = req.getSession(false);
+            int personId = (Integer) session.getAttribute("userId");
+
             LocalDate startDate = LocalDate.parse(req.getParameter("startDate"));
             LocalDate endDate = LocalDate.parse(req.getParameter("endDate"));
             int countryId = Integer.parseInt(req.getParameter("countryId"));
@@ -52,7 +48,7 @@ public class BookingServlet extends HttpServlet {
             IBookingService bookingService = new BookingServiceImpl();
             System.out.println(booking.toString());
             bookingService.add(booking);
-            req.getRequestDispatcher("pages/profile.jsp").forward(req, resp);
+            resp.sendRedirect("/profile");
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
