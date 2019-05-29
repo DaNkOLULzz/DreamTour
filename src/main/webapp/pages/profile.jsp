@@ -31,7 +31,7 @@
 
     <section id="content2">
         <c:forEach var="visa" items="${visaList}" varStatus="status">
-            <p>${status.index+1}. country - ${countryList[status.index].countryName} <span>end date - ${visa.endDate}</span></p>
+            <p>${status.index+1}. ${countryList[status.index].countryName} <span>end date - ${visa.endDate}</span></p>
         </c:forEach>
     </section>
     <section id="content3">
