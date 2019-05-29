@@ -27,11 +27,9 @@ main {
     border: 1px solid rgba(0, 0, 0, .2);
     background: rgba(0, 0, 0, 0.3);
     box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    overflow: auto;
 }
 
-.lab {
-    padding-right: 20vw;
-}
 
 section {
     display: none;
@@ -71,6 +69,10 @@ label[for*='2']:before {
     content: '\f022';
 }
 
+label[for*='3']:before {
+    content: '\f133';
+}
+
 span{
     float: right;
 }
@@ -87,7 +89,8 @@ input:checked + label {
 }
 
 #tab1:checked ~ #content1,
-#tab2:checked ~ #content2 {
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3 {
     display: block;
 }
 
