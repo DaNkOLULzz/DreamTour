@@ -8,12 +8,13 @@
     <style>
         <%@ include file="/css/hotelList.css"%>
     </style>
-    <link href="css/hotelList.css" rel="stylesheet"/>
+    <%--<link href="css/hotelList.css" rel="stylesheet"/>--%>
     <title>List of Hotels</title>
 
 </head>
 <body background="../images/bg_1.jpg">
 <%--<jsp:include page="../components/header.jsp"/>--%>
+
 
 <c:forEach items="${hotelList}" var="hotel" varStatus="status">
 
@@ -31,7 +32,7 @@
                 </c:forEach>
             </p>
 
-            <p>Price per day:</p>
+            <p>Price per day:${price}</p>
             <div class="statistics">
                 <span>average stay: ${countTourist[status.index]} days |  total tourists: ${averageStay[status.index]}</span>
             </div>
@@ -40,7 +41,7 @@
 
         <div class="product-image">
 
-            <img src="https://live.staticflickr.com/65535/32932471367_354f843af3_b.jpg">
+            <img src=${hotel.imageUrl}>
 
             <div class="info">
 
