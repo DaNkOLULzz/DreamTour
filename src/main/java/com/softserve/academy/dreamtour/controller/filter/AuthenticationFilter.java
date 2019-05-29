@@ -13,7 +13,7 @@ public class AuthenticationFilter implements Filter {
     private HttpServletRequest httpRequest;
     private HttpServletResponse httpResponse;
 
-    private String[] loginRequiredUrls = { "/profile" };
+    private String[] loginRequiredUrls = { "/profile", "/booking" };
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
