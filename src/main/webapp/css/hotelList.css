@@ -8,7 +8,7 @@ body {
     /*display: -ms-flexbox;
     display: flex;*/
     background-size: cover;
-    background: url("../images/bg_1.jpg") center center;
+    background: url('../images/bg_1.jpg') center center;
     font-family: 'Poppins', sans-serif;
 }
 

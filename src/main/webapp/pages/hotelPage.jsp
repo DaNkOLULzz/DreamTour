@@ -46,8 +46,7 @@
                 <h2>STANDARD</h2>
                 <img width="100%" height="300px" src="${roomStandard.imageUrl}">
                 <h3 class="info">Price: ${roomStandard.price}$ Free now: ${standardCount}</h3>
-                <a href="/booking?hotelId=${hotel.idHotel}&startDate=${startDate}&endDate=${endDate}&cityId=${cityId}
-                &countryId=${countryId}&roomId=${roomStandard.idRoom}">Book</a>
+                <a href="/booking?hotelId=${hotel.idHotel}&startDate=${startDate}&endDate=${endDate}&cityId=${cityId}&countryId=${countryId}&roomId=${roomStandard.idRoom}">Book</a>
             </div>
         </c:if>
 
@@ -57,8 +56,7 @@
                 <h2>LUXE</h2>
                 <img width="100%" height="300px" src="${roomLuxe.imageUrl}">
                 <h3 class="info">Price: ${roomLuxe.price}$ Free now: ${luxeCount}</h3>
-                    <a href="/booking?hotelId=${hotel.idHotel}&startDate=${startDate}&endDate=${endDate}
-                    &cityId=${cityId}&countryId=${countryId}&roomId=${roomLuxe.idRoom}">Book</a>
+                    <a href="/booking?hotelId=${hotel.idHotel}&startDate=${startDate}&endDate=${endDate}&cityId=${cityId}&countryId=${countryId}&roomId=${roomLuxe.idRoom}">Book</a>
 
             </div>
         </c:if>

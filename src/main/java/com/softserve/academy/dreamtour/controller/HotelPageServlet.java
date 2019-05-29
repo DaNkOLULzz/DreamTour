@@ -43,11 +43,10 @@ public class HotelPageServlet extends HttpServlet {
 
             String cityName = req.getParameter("city");
 
+            System.out.println("KEK" + cityName);
+
             ICityService cityService = new CityServiceImpl();
             City city = cityService.getCityByName(cityName);
-
-            System.out.println(city.getCityId());
-            System.out.println(city.getCountryId());
 
             req.setAttribute("countryId", city.getCountryId());
             req.setAttribute("cityId", city.getCityId());

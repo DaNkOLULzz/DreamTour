@@ -37,6 +37,9 @@ public class HotelListServlet extends HttpServlet {
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
 
+        req.setAttribute("chosenCountry", chosenCountry);
+        req.setAttribute("chosenCity", chosenCity);
+
         try {
             IHotelService hotelService = new HotelServiceImpl();
             IRoomService roomService = new RoomServiceImpl();
